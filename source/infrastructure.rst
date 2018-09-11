@@ -65,7 +65,7 @@ If you are using the default root compartment, this will be the same as your ten
 
 The next thing to set is an SSH key that you will use to connect to the server once it is built.
 See `GitHub's documentation <https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/>`_ on information on how to do this
-and then paste the contents of the public key into the ``ssh_public_key`` config variable between the two ``EOF``s.
+and then paste the contents of the public key into the ``ssh_public_key`` config variable between the two ``EOF``\ s.
 
 Finally, you need to decide what type of machines will make up your cluster.
 This is dependent on what shapes you have access to so check your service limits in the OCI web console.
