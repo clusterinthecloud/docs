@@ -13,6 +13,8 @@ By the end of this you  will have a fully-operational, elastically-scaling Slurm
 
 In the future, the intention is that this tutorial will cover installing on all major cloud providers but for now only Oracle Public Cloud is covered.
 
+Contributions to this document is welcome `at GitHub <https://github.com/ACRC/cluster-in-the-cloud>`_.
+
 Prerequisites
 -------------
 
@@ -25,4 +27,5 @@ To complete this tutorial you will need:
      - Ansible
      - SSH
 
+Start by :doc:`creating the infrastructure <infrastructure>`.
 
