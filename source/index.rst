@@ -20,12 +20,12 @@ Prerequisites
 
 To complete this tutorial you will need:
 
- - access to a command-line (i.e. Linux, MacOS Terminal or WSL)
- - an account with credit on Oracle cloud
- - local software installed:
-     - Terraform
-     - Ansible
-     - SSH
+* access to a command-line (i.e. Linux, MacOS Terminal or WSL)
+* an account with credit on Oracle cloud
+* local software installed
+
+  * Terraform
+  * Ansible
+  * SSH
 
 Start by :doc:`creating the infrastructure <infrastructure>`.
-
