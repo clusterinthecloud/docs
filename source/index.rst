@@ -1,5 +1,5 @@
-Welcome to Cluster in the cloud's documentation!
-================================================
+Create a cluster in the cloud
+=============================
 
 .. toctree::
    :maxdepth: 2
