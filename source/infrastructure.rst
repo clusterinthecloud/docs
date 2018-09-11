@@ -26,6 +26,10 @@ We're now ready to start configuring our infrastructure.
 Setting the config
 ------------------
 
+Start by making a new directory which will hold all our configuration.
+We will refer to this directory as the *base config directory*.
+Change to that directory in your terminal.
+
 Grab the Terraform config from Git using:
 
 .. code-block:: shell-session
@@ -56,7 +60,7 @@ Rename the example config file ``terraform.tfvars.example`` to ``terraform.tfvar
 Following the instructions at the `Oracle Terraform plugin docs <https://github.com/oracle/terraform-provider-oci#setup-credentials-for-using-oci>`_,
 set the values of ``tenancy_ocid``, ``user_ocid``, ``private_key_path``, ``fingerprint`` and ``region``.
 
-You will also need to set the comaprtment OCID of the compartment that you are using.
+You will also need to set the compartment OCID of the compartment that you are using.
 If you are using the default root compartment, this will be the same as your tenancy OCID.
 
 The next thing to set is an SSH key that you will use to connect to the server once it is built.
@@ -68,18 +72,20 @@ This is dependent on what shapes you have access to so check your service limits
 You will want a simple, lightweight VM for the management node and a set of more powerful VMs (or better, bare metal) machines for the compute nodes.
 For this tutorial, we will use ``VM.Standard2.16`` for the management node and 4 ``VM.Standard2.24`` for the compute nodes but it will depend on what you have access to.
 
-Set the ``ManagementShape`` config variable to the shape you want for the managament node::
+Set the ``ManagementShape`` config variable to the shape you want for the management node::
 
    ManagementShape = "VM.Standard2.16"
 
 To set the compute nodes, there are two config variables we need to set.
-The variable ``ComputeShapes`` contains a list of all the shapes for each node and ``InstanceADIndex`` contains a list of numbers refering to the availability domain each node should be in::
+The variable ``ComputeShapes`` contains a list of all the shapes for each node and ``InstanceADIndex`` contains a list of numbers referring to the availability domain each node should be in::
 
    InstanceADIndex = ["1", "1", "1", "1"]
    ComputeShapes = ["VM.Standard2.24", "VM.Standard2.24", "VM.Standard2.24", "VM.Standard2.24"]
 
 You see that there are two lists, each with four elements.
 The nth element in each list are related to each other.
+Once the nodes are created, they will be named ``compute001``, ``compute002`` etc. in the order they are listed here.
+
 If we instead wanted a ``BM.GPU2.2`` in AD 1, three ``BM.Standard1.36`` in AD 2 and one ``BM.DenseIO1.36`` in AD3 we would instead write::
 
    InstanceADIndex = ["1", "2", "2", "2", "3"]
@@ -130,6 +136,29 @@ We're now ready to go. Run
 
 and, when prompted, tell it that "yes", you do want to apply.
 
-It will take some time but should return without any errors.
+It will take some time but should return without any errors with something green that looks like::
+
+   Apply complete! Resources: 13 added, 0 changed, 0 destroyed.
+
+   Outputs:
+
+   ComputeHostnames = [
+       compute001,
+       compute002,
+       compute003,
+       compute004
+   ]
+   ComputePublicIPs = [
+       130.61.39.169,
+       130.61.83.195,
+       130.61.37.134,
+       130.61.44.148
+   ]
+   ManagementHostnames = [
+       mgmt
+   ]
+   ManagementPublicIPs = [
+       130.61.43.69
+   ]
 
 You are now ready to move on to :doc:`installing the software on the cluster <ansible>`.
