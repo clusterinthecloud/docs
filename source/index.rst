@@ -13,7 +13,8 @@ By the end of this you  will have a fully-operational, elastically-scaling Slurm
 
 In the future, the intention is that this tutorial will cover installing on all major cloud providers but for now only Oracle Public Cloud is covered.
 
-Contributions to this document is welcome `at GitHub <https://github.com/ACRC/cluster-in-the-cloud>`_.
+This tutorial was created by Matt Williams at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
+Contributions to this document are welcome `at GitHub <https://github.com/ACRC/cluster-in-the-cloud>`_.
 
 Prerequisites
 -------------
