@@ -22,11 +22,14 @@ Prerequisites
 To complete this tutorial you will need:
 
 * access to a command-line (i.e. Linux, MacOS Terminal or WSL)
+* an `SSH key pair <https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/>`_
 * an account with credit on Oracle cloud
+
+  * the account must have admin permissions to create infrastructure
+
 * local software installed
 
   * Terraform
-  * Ansible
   * SSH
 
 Start by :doc:`creating the infrastructure <infrastructure>`.

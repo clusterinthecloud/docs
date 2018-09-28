@@ -148,15 +148,6 @@ It will take some time but should return without any errors with something green
        compute003,
        compute004
    ]
-   ComputePublicIPs = [
-       130.61.39.169,
-       130.61.83.195,
-       130.61.37.134,
-       130.61.44.148
-   ]
-   ManagementHostnames = [
-       mgmt
-   ]
    ManagementPublicIPs = [
        130.61.43.69
    ]
