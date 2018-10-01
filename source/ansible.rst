@@ -1,5 +1,5 @@
-Installing the software
-=======================
+Finalising the setup
+====================
 
 Terraform will have automatically started the cluster software configuration step.
 It will run in the background and will take some time to complete.
@@ -27,7 +27,7 @@ If the ``finish`` script is not there, wait a minute or two and it should appear
 
 To follow the progress, you can look at the file ``ansible-pull.log`` in ``opc``'s home directory.
 
-You can keep on running ``finish`` until all nodes have finished configuring.
+You can keep on running trying to run ``finish`` until all nodes have finished configuring.
 Once they have, you need to tell the system about what user accounts you want to create.
 
 Copy the ``users.yml.example`` file to ``users.yml``:
@@ -37,6 +37,8 @@ Copy the ``users.yml.example`` file to ``users.yml``:
    [opc@mgmt ~]$ cp users.yml.example users.yml
 
 and edit it to contain the users you want.
+For the ``key`` attribute you can specify a URL of a file which contains a list of public keys (such as provided by GitHub)
+or explicitly provide a public key inline.
 For example, it might look like:
 
 .. code-block:: yaml
@@ -67,7 +69,7 @@ Once logged in, try running the ``sinfo`` command to check that Slurm is running
 
 .. code-block:: shell-session
 
-   [matt@mgmt ~]$$ [matt@mgmt ~]$ sinfo
+   [matt@mgmt ~]$ sinfo
    PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
    compute*     up   infinite      4   idle compute[001-004]
 
