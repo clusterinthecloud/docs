@@ -25,8 +25,8 @@ To complete this tutorial you will need:
 * an account with credit on Oracle cloud
 * local software installed
 
-  * Terraform
-  * Ansible
-  * SSH
+  * Terraform 0.11
+  * Ansible 2.5 or greater
+  * SSH 7.3 or greater
 
 Start by :doc:`creating the infrastructure <infrastructure>`.
