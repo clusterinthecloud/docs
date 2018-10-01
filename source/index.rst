@@ -29,7 +29,7 @@ To complete this tutorial you will need:
 
 * local software installed
 
-  * Terraform
+  * Terraform 0.11
   * SSH
 
 Start by :doc:`creating the infrastructure <infrastructure>`.
