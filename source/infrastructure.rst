@@ -19,8 +19,6 @@ you should get output like:
 
    Terraform v0.11.8
 
-We will be using the `Oracle Terraform plugin <https://github.com/oracle/terraform-provider-oci>`_ so follow the instructions there to install it.
-
 We're now ready to start configuring our infrastructure.
 
 Setting the config
@@ -48,7 +46,9 @@ Now, when you check the Terraform version, you should see the OCI provider showi
 
    $ terraform version
    Terraform v0.11.8
-   + provider.oci v2.1.13
+   + provider.null v1.0.0
+   + provider.oci v3.2.0
+   + provider.tls v1.2.0
 
 Rename the example config file ``terraform.tfvars.example`` to ``terraform.tfvars`` and open it in a text editor:
 
@@ -57,8 +57,9 @@ Rename the example config file ``terraform.tfvars.example`` to ``terraform.tfvar
    $ mv terraform.tfvars.example terraform.tfvars
    $ vim terraform.tfvars
 
-Following the instructions at the `Oracle Terraform plugin docs <https://github.com/oracle/terraform-provider-oci#setup-credentials-for-using-oci>`_,
+Following the instructions at the `Oracle Terraform plugin docs <https://www.terraform.io/docs/providers/oci/index.html#authentication>`_,
 set the values of ``tenancy_ocid``, ``user_ocid``, ``private_key_path``, ``fingerprint`` and ``region``.
+Make sure that the user account you use for ``user_ocid`` has admin access in your tenancy to create infrastructure.
 
 You will also need to set the compartment OCID of the compartment that you are using.
 If you are using the default root compartment, this will be the same as your tenancy OCID.
@@ -83,7 +84,7 @@ The variable ``ComputeShapes`` contains a list of all the shapes for each node a
    ComputeShapes = ["VM.Standard2.24", "VM.Standard2.24", "VM.Standard2.24", "VM.Standard2.24"]
 
 You see that there are two lists, each with four elements.
-The nth element in each list are related to each other.
+The n\ :sup:`th` element in each list are related to each other.
 Once the nodes are created, they will be named ``compute001``, ``compute002`` etc. in the order they are listed here.
 
 If we instead wanted a ``BM.GPU2.2`` in AD 1, three ``BM.Standard1.36`` in AD 2 and one ``BM.DenseIO1.36`` in AD3 we would instead write::
