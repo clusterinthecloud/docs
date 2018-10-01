@@ -7,6 +7,7 @@ Create a cluster in the cloud
 
    infrastructure
    ansible
+   running
 
 Welcome to the documentation for cluster in the cloud.
 By the end of this you  will have a fully-operational, elastically-scaling Slurm cluster running on cloud resources.
