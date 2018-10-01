@@ -62,6 +62,9 @@ The management node will always stay running which is why it's worth only using 
    This means that the auto-shutdown will not work as well for those shapes and **you will be charged**.
    Development is ongoing to avoid this.
 
+The rate at which Slurm shuts down is managed in ``/mnt/shared/apps/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
+See the `slurm.conf <https://slurm.schedmd.com/slurm.conf.html>`_ documentation for more details.
+
 Cluster shell
 -------------
 
