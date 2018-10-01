@@ -4,6 +4,36 @@ Running the cluster
 Now that you have a cluster which is up and running,
 it's worth knowing what you can do with it.
 
+Slurm jobs
+----------
+
+A full Slurm tutorial is outside of the scope of this document but it's configured in a fairly standard way.
+By default there's one single partition called ``compute`` which contains all the compute nodes.
+
+A simple first Slurm script, ``test.slm``, could look like:
+
+.. code-block:: bash
+
+   #! /bin/bash
+
+   #SBATCH --job-name=test
+   #SBATCH --partition=compute
+   #SBATCH --nodes=1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --cpus-per-task=1
+   #SBATCH --time=10:00
+   #SBATCH --exclusive
+
+   echo start
+   srun -l hostname
+   echo end
+
+which you could run with:
+
+.. code-block:: shell-session
+
+   [matt@mgmt ~]$ sbatch test.slm
+
 Slurm elastic scaling
 ---------------------
 
@@ -24,6 +54,13 @@ to turn on the node ``compute001``.
 You should never have to do anything to explicitly shut down the cluster,
 it will automatically turn off all nodes which are not in use after a timeout.
 The management node will always stay running which is why it's worth only using a relatively cheap VM for it.
+
+.. warning::
+
+   Currently, due to a quirk in OCI, it seems that while all VMs and most bare-metal nodes are not charged for while *stopped*,
+   the DenseIO nodes *are*.
+   This means that the auto-shutdown will not work as well for those shapes and **you will be charged**.
+   Development is ongoing to avoid this.
 
 Cluster shell
 -------------
@@ -49,6 +86,8 @@ You can then run a command with ``clush``:
    [opc@mgmt ~]$ clush -w @compute uname -r
    compute001: 3.10.0-862.2.3.el7.x86_64
    compute002: 3.10.0-862.2.3.el7.x86_64
+   compute003: 3.10.0-862.2.3.el7.x86_64
+   compute004: 3.10.0-862.2.3.el7.x86_64
 
 You can combine the output from different nodes using the ``-b`` flag:
 
@@ -56,7 +95,7 @@ You can combine the output from different nodes using the ``-b`` flag:
 
    [opc@mgmt ~]$ clush -w @compute -b uname -r
    ---------------
-   compute[001-002] (2)
+   compute[001-004] (4)
    ---------------
    3.10.0-862.2.3.el7.x86_64
 
