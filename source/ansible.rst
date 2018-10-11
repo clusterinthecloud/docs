@@ -74,3 +74,5 @@ Once logged in, try running the ``sinfo`` command to check that Slurm is running
    compute*     up   infinite      4   idle compute[001-004]
 
 Brilliant! Start submitting jobs.
+
+Check out the information on :doc:`running the cluster <running>`.
