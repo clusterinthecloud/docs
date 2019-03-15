@@ -55,14 +55,7 @@ You should never have to do anything to explicitly shut down the cluster,
 it will automatically turn off all nodes which are not in use after a timeout.
 The management node will always stay running which is why it's worth only using a relatively cheap VM for it.
 
-.. warning::
-
-   Currently, due to a quirk in OCI, it seems that while all VMs and most bare-metal nodes are not charged for while *stopped*,
-   the DenseIO nodes *are*.
-   This means that the auto-shutdown will not work as well for those shapes and **you will be charged**.
-   Development is ongoing to avoid this.
-
-The rate at which Slurm shuts down is managed in ``/mnt/shared/apps/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
+The rate at which Slurm shuts down is managed in ``/mnt/shared/etc/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
 See the `slurm.conf <https://slurm.schedmd.com/slurm.conf.html>`_ documentation for more details.
 
 Cluster shell
@@ -105,11 +98,11 @@ You can combine the output from different nodes using the ``-b`` flag:
 Installing software on your cluster
 -----------------------------------
 
-In order to do any actual work you will likely need to install some software.
-There are many ways to get this to work but I would recommend either using ``clush`` to install the software
-or, preferably, create a local Ansible playbook which installs it for you across the cluster.
+.. todo::
 
-In the latter case, you can use ``/home/opc/hosts`` as an inventory file and point your playbook to use it.
+    put it in /mnt/shared
+
+    we should make an ansible-pull hook
 
 Performance metrics
 -------------------

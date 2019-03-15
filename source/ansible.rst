@@ -5,8 +5,8 @@ Terraform will have automatically started the cluster software configuration ste
 It will run in the background and will take some time to complete.
 In the meantime, you can connect to the custer and follow its progress.
 
-Final configuration step
-------------------------
+Setting service limits
+----------------------
 
 You can log into the management node at ``yourusername@mgmtipaddress``,
 using the IP address that terraform printed at the end of its run. You can `forward
@@ -30,39 +30,57 @@ Once logged in, you can run the ``finish`` script:
 
    [opc@mgmt ~]$ ./finish
 
-It will most likely tell you that the nodes have not finished configuring.
+It will most likely tell you that the system has not finished configuring.
 If the ``finish`` script is not there, wait a minute or two and it should appear.
 
-To follow the progress, you can look at the file ``ansible-pull.log`` in ``opc``'s home directory.
+To follow the progress, you can look at the file ``ansible-pull.log`` in ``root``'s home directory.
 
-You can keep on running trying to run ``finish`` until all nodes have finished configuring.
-Once they have, you need to tell the system about what user accounts you want to create.
-
-Copy the ``users.yml.example`` file to ``users.yml``:
+You can keep on running trying to run ``finish`` until the node has finished configuring.
+Once it has, you need to tell the system what limits you want to place on the scaling of the cloud.
+To decide what to put here, you should refer to your service limits in the OCI website.
+In the future, we hope to be able to extract these automatically but for now you need to replicate it manually.
+Edit the file ``/home/opc/limits.yaml`` with:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ cp users.yml.example users.yml
+   [opc@mgmt ~]$ vim limits.yaml
 
-and edit it to contain the users you want.
-For the ``key`` attribute you can specify a URL of a file which contains a list of public keys (such as provided by GitHub)
-or explicitly provide a public key inline.
-For example, it might look like:
+and set its contents to somthing like:
 
 .. code-block:: yaml
 
-   ---
-   users:
-     - name: matt
-       key: https://github.com/milliams.keys
-     - name: anotheruser
-       key: ssh-rsa UmFuZG9tIGtleSBjb250ZW50cy4gUHV0IHlvdXIgb3duIGtleSBpbiBoZXJlIG9idmlvdXNseS4= user@computer
+   VM.Standard2.1:
+     1: 1
+     2: 1
+     3: 1
+   VM.Standard2.2:
+     1: 1
+     2: 1
+     3: 1
 
-Run ``finish`` again and it should create those users across the system:
+which specifies for each shape, what the service limit is for each AD in the region your cluster lives in.
+In this case each of the shapes ``VM.Standard2.1`` and ``VM.Standard2.2`` have a service limit of 1 in each AD.
+The system will automatically adjust for the shape used by the management node.
+
+Run ``finish`` again and it should configure and start the Slurm server:
 
 .. code-block:: shell-session
 
    [opc@mgmt ~]$ ./finish
+
+If your service limits change, you can update the file and run the script again.
+
+Adding users
+------------
+
+To add users to the system, you run the command ``/usr/local/sbin/add_user_ldap`` passing it the username of the user you want to add,
+the user's first and surnames and the URL of a file containing their SSH public keys.
+
+.. code-block:: shell-session
+
+   [opc@mgmt ~]$ sudo /usr/local/sbin/add_user_ldap matt Matt Williams https://github.com/milliams.keys
+
+You can run this command again to add another user.
 
 Once it has succeeded, log out and try logging as one of those users.
 
@@ -79,7 +97,7 @@ Once logged in, try running the ``sinfo`` command to check that Slurm is running
 
    [matt@mgmt ~]$ sinfo
    PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-   compute*     up   infinite      4   idle compute[001-004]
+   compute*     up   infinite      0    n/a
 
 Brilliant! Start submitting jobs.
 
