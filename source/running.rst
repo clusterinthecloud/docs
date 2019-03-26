@@ -34,25 +34,51 @@ which you could run with:
 
    [matt@mgmt ~]$ sbatch test.slm
 
+To check that Slurm has started the node you need, you can run ``sinfo``:
+
+.. code-block:: shell-session
+
+   [matt@mgmt ~]$ sinfo
+   PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+   compute*     up   infinite      1 alloc# vm-standard2-1-ad1-0001
+
+where the ``state`` being ``alloc#`` means that the node has been allocated to a job and the ``#`` means that it is currently in the process of being turned on.
+
+Eventually, once the node has started, the state will change to ``alloc``:
+
+.. code-block:: shell-session
+
+   [matt@mgmt ~]$ sinfo
+   PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+   compute*     up   infinite      1  alloc vm-standard2-1-ad1-0001
+
+and then once the job has finished the state will move to ``idle``:
+
+.. code-block:: shell-session
+
+   [matt@mgmt ~]$ sinfo
+   PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+   compute*     up   infinite      1   idle vm-standard2-1-ad1-0001
+
 Slurm elastic scaling
 ---------------------
 
 Slurm is configured to use its `elastic computing <https://slurm.schedmd.com/elastic_computing.html>`_ mode.
-This allows Slurm to automatically turn off any nodes which are not currently being used for running jobs
-and turn on any nodes which are needed for running jobs.
-This is particularly useful in the cloud as a node which has been shut down will not be charged for.
+This allows Slurm to automatically terminate any nodes which are not currently being used for running jobs
+and create any nodes which are needed for running jobs.
+This is particularly useful in the cloud as a node which has been terminated will not be charged for.
 
 Slurm does this by calling a script ``/usr/local/bin/startnode`` as the ``slurm`` user.
 If necessary, you can call this yourself from the ``opc`` user like:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo -u slurm /usr/local/bin/startnode compute001
+   [opc@mgmt ~]$ sudo scontrol update NodeName=vm-standard2-1-ad1-0001 State=POWER_ON
 
-to turn on the node ``compute001``.
+to turn on the node ``vm-standard2-1-ad1-0001``.
 
 You should never have to do anything to explicitly shut down the cluster,
-it will automatically turn off all nodes which are not in use after a timeout.
+it will automatically terminate all nodes which are not in use after a timeout.
 The management node will always stay running which is why it's worth only using a relatively cheap VM for it.
 
 The rate at which Slurm shuts down is managed in ``/mnt/shared/etc/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
