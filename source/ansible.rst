@@ -33,7 +33,13 @@ Once logged in, you can run the ``finish`` script:
 It will most likely tell you that the system has not finished configuring.
 If the ``finish`` script is not there, wait a minute or two and it should appear.
 
-To follow the progress, you can look at the file ``ansible-pull.log`` in ``root``'s home directory.
+To follow the progress, you can look at the file ``ansible-pull.log`` in ``root``'s home directory:
+
+.. code-block:: shell-session
+
+    [opc@mgmt ~]$ sudo tail -f /root/ansible-pull.log
+
+Use ``ctrl-c`` to stop following the log.
 
 You can keep on running trying to run ``finish`` until the node has finished configuring.
 Once it has, you need to tell the system what limits you want to place on the scaling of the cloud.
@@ -99,6 +105,7 @@ Once logged in, try running the ``sinfo`` command to check that Slurm is running
    PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
    compute*     up   infinite      0    n/a
 
-Brilliant! Start submitting jobs.
+It shows the number of nodes being zero as the nodes will be automatically created as they are required,
+up to the limit specified in the earlier step. This is all looking good so let's start submitting jobs.
 
 Check out the information on :doc:`running the cluster <running>`.
