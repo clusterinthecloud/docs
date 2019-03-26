@@ -100,7 +100,7 @@ Next, check that Terraform is ready to run with
 
    $ terraform plan
 
-which should have, near the end, something like ``Plan: 12 to add, 0 to change, 0 to destroy.``.
+which should have, near the end, something like ``Plan: 11 to add, 0 to change, 0 to destroy.``.
 
 We're now ready to go. Run
 
@@ -112,7 +112,7 @@ and, when prompted, tell it that "yes", you do want to apply.
 
 It will take some time but should return without any errors with something green that looks like::
 
-   Apply complete! Resources: 12 added, 0 changed, 0 destroyed.
+   Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
 
    Outputs:
 
