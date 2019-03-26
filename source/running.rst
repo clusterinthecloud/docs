@@ -121,14 +121,18 @@ You can combine the output from different nodes using the ``-b`` flag:
    ---------------
    3.10.0-862.2.3.el7.x86_64
 
+Bear in mind that since the nodes are created afresh each time they are started,
+any changes you make to a running node will not be persisted.
+It will also not be able to run on any nodes that are not currently running.
+
 Installing software on your cluster
 -----------------------------------
 
-.. todo::
+To make software available across your cluster, the best way is to install it onto the shared filesystem at ``/mnt/shared``.
+Make sure that all the dependencies for it are available either on the shared filesystem or in the base image you're using.
+i.e. don't use ``yum install`` to provide dependencies.
 
-    put it in /mnt/shared
-
-    we should make an ansible-pull hook
+Consider using a tool like `EasyBuild <https://easybuild.readthedocs.io>`_ or `Spack <https://spack.io/>`_ to manage you software stack.
 
 Performance metrics
 -------------------
