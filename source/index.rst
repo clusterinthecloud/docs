@@ -10,7 +10,7 @@ Create a cluster in the cloud
    running
 
 Welcome to the documentation for cluster in the cloud.
-By the end of this you  will have a fully-operational, elastically-scaling Slurm cluster running on cloud resources.
+By the end of this you  will have a fully-operational, elastically-scaling, heterogeneous Slurm cluster running on cloud resources.
 
 In the future, the intention is that this tutorial will cover installing on all major cloud providers but for now only Oracle Public Cloud is covered.
 
