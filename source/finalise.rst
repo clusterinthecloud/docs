@@ -9,20 +9,12 @@ Setting service limits
 ----------------------
 
 You can log into the management node at ``yourusername@mgmtipaddress``,
-using the IP address that terraform printed at the end of its run. You can `forward
-your SSH key <https://developer.github.com/v3/guides/using-ssh-agent-forwarding/>`_
-from your workstation to avoid copying the private key in to the cloud. First test 
-that you can talk to the SSH agent by asking it to list the keys:
+using the IP address that terraform printed at the end of its run.
+For example:
 
 .. code-block:: shell-session
 
-   $ ssh-add -L
-
-Then connect to the managment node. For example:
-
-.. code-block:: shell-session
-
-   $ ssh -A opc@130.61.43.69
+   $ ssh opc@130.61.43.69
 
 Once logged in, you can run the ``finish`` script:
 
