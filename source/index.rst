@@ -6,7 +6,7 @@ Create a cluster in the cloud
    :caption: Contents:
 
    infrastructure
-   ansible
+   finalise
    running
 
 Welcome to the documentation for cluster in the cloud.

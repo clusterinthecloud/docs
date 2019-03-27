@@ -120,4 +120,4 @@ It will take some time but should return without any errors with something green
        130.61.43.69
    ]
 
-You are now ready to move on to :doc:`installing the software on the cluster <ansible>`.
+You are now ready to move on to :doc:`finalising the setup on the cluster <finalise>`.
