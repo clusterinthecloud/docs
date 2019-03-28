@@ -156,3 +156,5 @@ you can destroy it using Terraform.
 .. code-block:: shell-session
 
    $ terraform destroy
+
+It will also attempt to terminate any running compute nodes you still have but make sure to check the web interface.
