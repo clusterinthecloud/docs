@@ -17,7 +17,6 @@ A simple first Slurm script, ``test.slm``, could look like:
    #! /bin/bash
 
    #SBATCH --job-name=test
-   #SBATCH --partition=compute
    #SBATCH --nodes=1
    #SBATCH --ntasks-per-node=2
    #SBATCH --cpus-per-task=1
