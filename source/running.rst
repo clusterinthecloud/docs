@@ -105,10 +105,11 @@ You can then run a command with ``clush``:
 .. code-block:: shell-session
 
    [opc@mgmt ~]$ clush -w @compute uname -r
-   compute001: 3.10.0-862.2.3.el7.x86_64
-   compute002: 3.10.0-862.2.3.el7.x86_64
-   compute003: 3.10.0-862.2.3.el7.x86_64
-   compute004: 3.10.0-862.2.3.el7.x86_64
+   vm-standard2-1-ad1-0001: 4.14.35-1844.2.5.el7uek.x86_64
+   vm-standard2-1-ad3-0001: 4.14.35-1844.2.5.el7uek.x86_64
+   vm-standard2-2-ad3-0001: 4.14.35-1844.2.5.el7uek.x86_64
+   vm-standard2-2-ad2-0001: 4.14.35-1844.2.5.el7uek.x86_64
+   vm-standard2-1-ad2-0001: 4.14.35-1844.2.5.el7uek.x86_64
 
 You can combine the output from different nodes using the ``-b`` flag:
 
@@ -116,9 +117,9 @@ You can combine the output from different nodes using the ``-b`` flag:
 
    [opc@mgmt ~]$ clush -w @compute -b uname -r
    ---------------
-   compute[001-004] (4)
+   vm-standard2-[1-2]-ad3-0001,vm-standard2-1-ad[1-2]-0001,vm-standard2-2-ad2-0001 (5)
    ---------------
-   3.10.0-862.2.3.el7.x86_64
+   4.14.35-1844.2.5.el7uek.x86_64
 
 Bear in mind that since the nodes are created afresh each time they are started,
 any changes you make to a running node will not be persisted.
