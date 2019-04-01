@@ -75,15 +75,13 @@ Set the ``ManagementShape`` config variable to the shape you want for the manage
 
    ManagementShape = "VM.Standard2.16"
 
-That has defined the types and location of all the nodes we are installing.
-We need to tell OCI what OS to install onto the management machine which we do by setting ``ManagementImageOCID``.
-To decide what values to put in these, look at `OCI's list of images <https://docs.us-phoenix-1.oraclecloud.com/images/>`_.
-Note that at present, only the official Oracle Linux 7 image is supported.
-We will install the latest version of Oracle Linux onto each::
+The second thing we need to do for the management node is decide which AD it should reside in.
+Set the variable ``ManagementAD`` to whichever AD you'd like to use::
 
-   ManagementImageOCID = {
-     eu-frankfurt-1 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa7qdjjqlvryzxx4i2zs5si53edgmwr2ldn22whv5wv34fc3sdsova"
-   }
+   ManagementAD = "1"
+
+Running Terraform
+-----------------
 
 At this point, we are ready to provision our infrastructure.
 Check that there's no immediate errors with
