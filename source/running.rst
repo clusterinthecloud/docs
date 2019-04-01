@@ -17,7 +17,6 @@ A simple first Slurm script, ``test.slm``, could look like:
    #! /bin/bash
 
    #SBATCH --job-name=test
-   #SBATCH --partition=compute
    #SBATCH --nodes=1
    #SBATCH --ntasks-per-node=2
    #SBATCH --cpus-per-task=1
@@ -34,35 +33,54 @@ which you could run with:
 
    [matt@mgmt ~]$ sbatch test.slm
 
+To check that Slurm has started the node you need, you can run ``sinfo``:
+
+.. code-block:: shell-session
+
+   [matt@mgmt ~]$ sinfo
+   PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+   compute*     up   infinite      1 alloc# vm-standard2-1-ad1-0001
+
+where the ``state`` being ``alloc#`` means that the node has been allocated to a job and the ``#`` means that it is currently in the process of being turned on.
+
+Eventually, once the node has started, the state will change to ``alloc``:
+
+.. code-block:: shell-session
+
+   [matt@mgmt ~]$ sinfo
+   PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+   compute*     up   infinite      1  alloc vm-standard2-1-ad1-0001
+
+and then once the job has finished the state will move to ``idle``:
+
+.. code-block:: shell-session
+
+   [matt@mgmt ~]$ sinfo
+   PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+   compute*     up   infinite      1   idle vm-standard2-1-ad1-0001
+
 Slurm elastic scaling
 ---------------------
 
 Slurm is configured to use its `elastic computing <https://slurm.schedmd.com/elastic_computing.html>`_ mode.
-This allows Slurm to automatically turn off any nodes which are not currently being used for running jobs
-and turn on any nodes which are needed for running jobs.
-This is particularly useful in the cloud as a node which has been shut down will not be charged for.
+This allows Slurm to automatically terminate any nodes which are not currently being used for running jobs
+and create any nodes which are needed for running jobs.
+This is particularly useful in the cloud as a node which has been terminated will not be charged for.
 
 Slurm does this by calling a script ``/usr/local/bin/startnode`` as the ``slurm`` user.
 If necessary, you can call this yourself from the ``opc`` user like:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo -u slurm /usr/local/bin/startnode compute001
+   [opc@mgmt ~]$ sudo scontrol update NodeName=vm-standard2-1-ad1-0001 State=POWER_ON
 
-to turn on the node ``compute001``.
+to turn on the node ``vm-standard2-1-ad1-0001``.
 
 You should never have to do anything to explicitly shut down the cluster,
-it will automatically turn off all nodes which are not in use after a timeout.
+it will automatically terminate all nodes which are not in use after a timeout.
 The management node will always stay running which is why it's worth only using a relatively cheap VM for it.
 
-.. warning::
-
-   Currently, due to a quirk in OCI, it seems that while all VMs and most bare-metal nodes are not charged for while *stopped*,
-   the DenseIO nodes *are*.
-   This means that the auto-shutdown will not work as well for those shapes and **you will be charged**.
-   Development is ongoing to avoid this.
-
-The rate at which Slurm shuts down is managed in ``/mnt/shared/apps/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
+The rate at which Slurm shuts down is managed in ``/mnt/shared/etc/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
 See the `slurm.conf <https://slurm.schedmd.com/slurm.conf.html>`_ documentation for more details.
 
 Cluster shell
@@ -87,10 +105,11 @@ You can then run a command with ``clush``:
 .. code-block:: shell-session
 
    [opc@mgmt ~]$ clush -w @compute uname -r
-   compute001: 3.10.0-862.2.3.el7.x86_64
-   compute002: 3.10.0-862.2.3.el7.x86_64
-   compute003: 3.10.0-862.2.3.el7.x86_64
-   compute004: 3.10.0-862.2.3.el7.x86_64
+   vm-standard2-1-ad1-0001: 4.14.35-1844.2.5.el7uek.x86_64
+   vm-standard2-1-ad3-0001: 4.14.35-1844.2.5.el7uek.x86_64
+   vm-standard2-2-ad3-0001: 4.14.35-1844.2.5.el7uek.x86_64
+   vm-standard2-2-ad2-0001: 4.14.35-1844.2.5.el7uek.x86_64
+   vm-standard2-1-ad2-0001: 4.14.35-1844.2.5.el7uek.x86_64
 
 You can combine the output from different nodes using the ``-b`` flag:
 
@@ -98,18 +117,22 @@ You can combine the output from different nodes using the ``-b`` flag:
 
    [opc@mgmt ~]$ clush -w @compute -b uname -r
    ---------------
-   compute[001-004] (4)
+   vm-standard2-[1-2]-ad3-0001,vm-standard2-1-ad[1-2]-0001,vm-standard2-2-ad2-0001 (5)
    ---------------
-   3.10.0-862.2.3.el7.x86_64
+   4.14.35-1844.2.5.el7uek.x86_64
+
+Bear in mind that since the nodes are created afresh each time they are started,
+any changes you make to a running node will not be persisted.
+It will also not be able to run on any nodes that are not currently running.
 
 Installing software on your cluster
 -----------------------------------
 
-In order to do any actual work you will likely need to install some software.
-There are many ways to get this to work but I would recommend either using ``clush`` to install the software
-or, preferably, create a local Ansible playbook which installs it for you across the cluster.
+To make software available across your cluster, the best way is to install it onto the shared filesystem at ``/mnt/shared``.
+Make sure that all the dependencies for it are available either on the shared filesystem or in the base image you're using.
+i.e. don't use ``yum install`` to provide dependencies.
 
-In the latter case, you can use ``/home/opc/hosts`` as an inventory file and point your playbook to use it.
+Consider using a tool like `EasyBuild <https://easybuild.readthedocs.io>`_ or `Spack <https://spack.io/>`_ to manage you software stack.
 
 Performance metrics
 -------------------
@@ -134,3 +157,6 @@ you can destroy it using Terraform.
 .. code-block:: shell-session
 
    $ terraform destroy
+
+This command *will* ask for confirmation before destroying anything but be sure to read the list of things it's going to terminate to check that it's doing the right thing.
+It will also attempt to terminate any running compute nodes you still have but make sure to check the web interface afterwards.
