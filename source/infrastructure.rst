@@ -32,7 +32,7 @@ Grab the Terraform config from Git using:
 
 .. code-block:: shell-session
 
-   $ git clone --branch citc2 https://github.com/ACRC/oci-cluster-terraform.git
+   $ git clone https://github.com/ACRC/oci-cluster-terraform.git
 
 Now move into that directory and initialise the Terraform repo:
 
