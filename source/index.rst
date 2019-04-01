@@ -14,8 +14,12 @@ By the end of this you  will have a fully-operational, elastically-scaling, hete
 
 In the future, the intention is that this tutorial will cover installing on all major cloud providers but for now only Oracle Public Cloud is covered.
 
-This tutorial was created by Matt Williams at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
-Contributions to this document are welcome `at GitHub <https://github.com/ACRC/cluster-in-the-cloud>`_.
+This tutorial was created by `Matt Williams <https://github.com/milliams/>`_ at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
+Contributions to this tutorial document are welcome `at GitHub <https://github.com/ACRC/cluster-in-the-cloud>`_.
+
+.. note::
+
+   If you have any questions or issues with the system as a whole, please raise them at `milliams/cluster-in-the-cloud <https://github.com/milliams/cluster-in-the-cloud/issues>`_.
 
 Prerequisites
 -------------
