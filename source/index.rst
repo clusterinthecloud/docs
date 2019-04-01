@@ -17,7 +17,7 @@ In the future, the intention is that this tutorial will cover installing on all 
 This tutorial was created by `Matt Williams <https://github.com/milliams/>`_ at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
 Contributions to this tutorial document are welcome `at GitHub <https://github.com/ACRC/cluster-in-the-cloud>`_.
 
-.. note::
+.. admonition:: If you need help
 
    If you have any questions or issues with the system as a whole, please raise them at `milliams/cluster-in-the-cloud <https://github.com/milliams/cluster-in-the-cloud/issues>`_.
 
