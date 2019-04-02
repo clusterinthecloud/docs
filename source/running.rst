@@ -72,7 +72,7 @@ If necessary, you can call this yourself from the ``opc`` user like:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo scontrol update NodeName=vm-standard2-1-ad1-0001 State=POWER_ON
+   [opc@mgmt ~]$ sudo scontrol update NodeName=vm-standard2-1-ad1-0001 State=POWER_UP
 
 to turn on the node ``vm-standard2-1-ad1-0001``.
 
