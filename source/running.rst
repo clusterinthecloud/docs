@@ -134,14 +134,20 @@ i.e. don't use ``yum install`` to provide dependencies.
 
 Consider using a tool like `EasyBuild <https://easybuild.readthedocs.io>`_ or `Spack <https://spack.io/>`_ to manage you software stack.
 
-Performance metrics
--------------------
+Monitoring
+----------
 
 The cluster automatically collects data from all the nodes and makes them available in a web dashboard.
 
 It is available at the IP address of you management node on port 3000.
-Point your browser at http://your.mgmt.ip.address:3000 and log in with the username *admin* and the password *admin*.
-You will be prompted to create a new password before you continue.
+Point your browser at ``http://your.mgmt.ip.address:3000`` and log in with the username *admin*.
+The password for the dashboard can be found by running:
+
+.. code-block:: shell-session
+
+   [opc@mgmt ~]$ ./get_secrets
+
+Once you are logged in, you can find a dashboard showing the state of nodes by clicking on "Home ▾" and selecting "Slurm".
 
 Destroying the whole cluster
 ----------------------------
