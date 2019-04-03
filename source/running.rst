@@ -16,16 +16,7 @@ A simple first Slurm script, ``test.slm``, could look like:
 
    #! /bin/bash
 
-   #SBATCH --job-name=test
-   #SBATCH --nodes=1
-   #SBATCH --ntasks-per-node=2
-   #SBATCH --cpus-per-task=1
-   #SBATCH --time=10:00
-   #SBATCH --exclusive
-
-   echo start
    srun -l hostname
-   echo end
 
 which you could run with:
 
@@ -58,6 +49,20 @@ and then once the job has finished the state will move to ``idle``:
    [matt@mgmt ~]$ sinfo
    PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
    compute*     up   infinite      1   idle vm-standard2-1-ad1-0001
+
+If you want more control over the size of your job etc., then you can set those flags in the job script:
+
+.. code-block:: bash
+
+   #! /bin/bash
+
+   #SBATCH --job-name=test
+   #SBATCH --nodes=1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --cpus-per-task=1
+   #SBATCH --time=10:00
+
+   srun -l hostname
 
 Slurm elastic scaling
 ---------------------
