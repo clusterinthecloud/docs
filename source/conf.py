@@ -153,3 +153,5 @@ texinfo_documents = [
      author, 'Clusterinthecloud', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+html_logo = "logo.png"
