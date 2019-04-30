@@ -165,7 +165,7 @@ pinpoint problems by running
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo sosreport --only-plugins citc
+   [opc@mgmt ~]$ sudo sosreport --only-plugins citc && sudo chown opc /var/tmp/sosreport*
 
 For ``case id`` put your GitHub username (if you have one). This will generate
 a ``tar.xz`` file that can be downloaded and then attached to, for example, a
