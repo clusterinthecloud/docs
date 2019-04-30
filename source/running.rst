@@ -154,6 +154,23 @@ The password for the dashboard can be found by running:
 
 Once you are logged in, you can find a dashboard showing the state of nodes by clicking on "Home ▾" and selecting "Slurm".
 
+Reporting issues
+----------------
+
+Please report questions and problems to `Cluster in the Cloud GitHub Issues
+<https://github.com/milliams/cluster-in-the-cloud/issues>`_.
+
+You can gather diagnostic information from your cluster which might help
+pinpoint problems by running
+
+.. code-block:: shell-session
+
+   [opc@mgmt ~]$ sudo sosreport --only-plugins citc
+
+For ``case id`` put your GitHub username (if you have one). This will generate
+a ``tar.xz`` file that can be downloaded and then attached to, for example, a
+GitHub issue.
+
 Destroying the whole cluster
 ----------------------------
 
