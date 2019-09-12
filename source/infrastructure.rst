@@ -73,7 +73,7 @@ for this tutorial, we will use ``VM.Standard2.16`` for the management node.
 
 Set the ``ManagementShape`` config variable to the shape you want for the management node::
 
-   ManagementShape = "VM.Standard2.16"
+   ManagementShape = "VM.Standard2.1"
 
 The second thing we need to do for the management node is decide which AD it should reside in.
 Set the variable ``ManagementAD`` to whichever AD you'd like to use::
