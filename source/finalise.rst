@@ -80,6 +80,12 @@ the user's first and surnames and the URL of a file containing their SSH public 
 
 You can run this command again to add another user.
 
+If the user does not have an online list of their keys, you can copy the public key to the ``mgmt`` node with ``scp`` and then use the ``file`` protocol:
+
+.. code-block:: shell-session
+
+   [opc@mgmt ~]$ sudo /usr/local/sbin/add_user_ldap matt Matt Williams file:///home/opc/users_key.pub
+
 Once it has succeeded, log out and try logging as one of those users.
 
 Check Slurm is running
