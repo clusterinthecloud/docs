@@ -36,5 +36,6 @@ To complete this tutorial you will need:
 
   * Terraform 0.11
   * SSH
+  * Git
 
 Start by :doc:`creating the infrastructure <infrastructure>`.
