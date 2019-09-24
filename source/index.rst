@@ -34,7 +34,7 @@ To complete this tutorial you will need:
 
 * local software installed
 
-  * Terraform 0.11
+  * Terraform 0.12
   * SSH
   * Git
 
