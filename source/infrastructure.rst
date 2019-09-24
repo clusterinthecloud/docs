@@ -54,7 +54,7 @@ Rename the example config file ``terraform.tfvars.example`` to ``terraform.tfvar
 
 .. code-block:: shell-session
 
-   $ mv terraform.tfvars.example terraform.tfvars
+   $ mv oracle-cloud-infrastructure/terraform.tfvars.example terraform.tfvars
    $ vim terraform.tfvars
 
 Following the instructions at the `Oracle Terraform plugin docs <https://www.terraform.io/docs/providers/oci/index.html#authentication>`_,
@@ -88,7 +88,7 @@ Check that there's no immediate errors with
 
 .. code-block:: shell-session
 
-   $ terraform validate
+   $ terraform validate oracle-cloud-infrastructure
 
 It should return with no errors.
 If there are any problems, fix them before continuing.
@@ -97,7 +97,7 @@ Next, check that Terraform is ready to run with
 
 .. code-block:: shell-session
 
-   $ terraform plan
+   $ terraform plan oracle-cloud-infrastructure
 
 which should have, near the end, something like ``Plan: 9 to add, 0 to change, 0 to destroy.``.
 
@@ -105,7 +105,7 @@ We're now ready to go. Run
 
 .. code-block:: shell-session
 
-   $ terraform apply
+   $ terraform apply oracle-cloud-infrastructure
 
 and, when prompted, tell it that "yes", you do want to apply.
 
