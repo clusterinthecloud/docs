@@ -34,14 +34,15 @@ This step will likely take a few minutes so be patient:
                             file.googleapis.com
 
 That's all the structural setup for the account needed.
-The last ``gcloud`` thing we need to do is create a service account which Terraform uses to communicate with GCP:
+The last ``gcloud`` thing we need to do is create a service account which Terraform uses to communicate with GCP.
+Make sure to replace every instance of ``<citc-123456>`` with your project ID:
 
 .. code-block:: shell-session
 
    $ gcloud iam service-accounts create citc-terraform --display-name "CitC Terraform"
-   $ gcloud projects add-iam-policy-binding citc-123456 --member serviceAccount:citc-terraform@citc-123456.iam.gserviceaccount.com --role='roles/editor'
-   $ gcloud projects add-iam-policy-binding citc-123456 --member serviceAccount:citc-terraform@citc-123456.iam.gserviceaccount.com --role='roles/iam.securityAdmin'
-   $ gcloud iam service-accounts keys create citc-terraform-credentials.json --iam-account=citc-terraform@citc-123456.iam.gserviceaccount.com
+   $ gcloud projects add-iam-policy-binding <citc-123456> --member serviceAccount:citc-terraform@<citc-123456>.iam.gserviceaccount.com --role='roles/editor'
+   $ gcloud projects add-iam-policy-binding <citc-123456> --member serviceAccount:citc-terraform@<citc-123456>.iam.gserviceaccount.com --role='roles/iam.securityAdmin'
+   $ gcloud iam service-accounts keys create citc-terraform-credentials.json --iam-account=citc-terraform@<citc-123456>.iam.gserviceaccount.com
 
 This will create a local JSON file which contains the credentials for this user.
 
@@ -55,7 +56,7 @@ For now this must be created with no passphrase:
 Setting the config
 ------------------
 
-To initialise the local Terrafrom repo, start by running the following:
+To initialise the local Terraform repo, start by running the following:
 
 .. code-block:: shell-session
 
