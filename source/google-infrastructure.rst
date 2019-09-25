@@ -34,7 +34,7 @@ This step will likely take a few minutes so be patient:
                             file.googleapis.com
 
 That's all the structural setup for the account needed.
-The last ``gcloud`` thing we need to do is create a service account which Terraform uses to communicate with GCP.
+The last ``gcloud`` task we need to do is create a service account which Terraform uses to communicate with GCP.
 Make sure to replace every instance of ``<citc-123456>`` with your project ID:
 
 .. code-block:: shell-session
