@@ -36,8 +36,6 @@ Use ``ctrl-c`` to stop following the log.
 
 You can keep on running trying to run ``finish`` until the node has finished configuring.
 Once it has, you need to tell the system what limits you want to place on the scaling of the cloud.
-To decide what to put here, you should refer to your service limits in the OCI website.
-In the future, we hope to be able to extract these automatically but for now you need to replicate it manually.
 Edit the file ``/home/opc/limits.yaml`` with:
 
 .. code-block:: shell-session
@@ -60,6 +58,9 @@ On an Oracle-based system, you should set its contents to something like:
 which specifies for each shape, what the service limit is for each AD in the region your cluster lives in.
 In this case each of the shapes ``VM.Standard2.1`` and ``VM.Standard2.2`` have a service limit of 1 in each AD.
 The system will automatically adjust for the shape used by the management node.
+
+To decide what to put here, you should refer to your service limits in the OCI website.
+In the future, we hope to be able to extract these automatically but for now you need to replicate it manually.
 
 On a Google-based system, you should set it to something like:
 

@@ -5,18 +5,16 @@ Setting up the environment
 --------------------------
 
 - Install gcloud
-- Run ``gcloud iam service-accounts list`` to find email of "Compute Engine default service account"
 - ``gcloud config set account googleaccount@googlecloud.example``
 - ``gcloud config set project citc-123456``
+- ``gcloud services enable compute.googleapis.com iam.googleapis.com cloudresourcemanager.googleapis.com file.googleapis.com``
 
 - ``gcloud iam service-accounts create citc-terraform --display-name "CitC Terraform"``
 - ``gcloud projects add-iam-policy-binding citc-123456 --member serviceAccount:citc-terraform@citc-123456.iam.gserviceaccount.com --role='roles/editor'``
 - ``gcloud projects add-iam-policy-binding citc-123456 --member serviceAccount:citc-terraform@citc-123456.iam.gserviceaccount.com --role='roles/iam.securityAdmin'``
 - ``gcloud iam service-accounts keys create citc-terraform-credentials.json --iam-account=citc-terraform@citc-123456.iam.gserviceaccount.com``
 
-- ``gcloud services enable compute.googleapis.com iam.googleapis.com cloudresourcemanager.googleapis.com file.googleapis.com``
-
-- Create ssh key pair ``ssh-keygen -t rsa -f ~/.ssh/citc-google -C provisioner``
+- Create ssh key pair ``ssh-keygen -t rsa -f ~/.ssh/citc-google -C provisioner`` with no passphrase
 
 Setting the config
 ------------------
@@ -25,15 +23,16 @@ Setting the config
 
    $ terraform init google-cloud-platform
 
-Now, when you check the Terraform version, you should see the OCI provider showing up:
+Now, when you check the Terraform version, you should see the Google provider showing up:
 
 .. code-block:: shell-session
 
    $ terraform version
    Terraform v0.12.9
-   + provider.oci v3.44.0
+   + provider.external v1.2.0
+   + provider.google v2.10.0
+   + provider.tls v1.3.0
    + provider.template v2.1.0
-   + provider.tls v2.1.0
 
 Rename the example config file ``google-cloud-platform/terraform.tfvars.example`` to ``terraform.tfvars`` and open it in a text editor:
 
@@ -43,7 +42,10 @@ Rename the example config file ``google-cloud-platform/terraform.tfvars.example`
    $ vim terraform.tfvars
 
 .. note::
-   setup
+   - Set region and zone
+   - Set project name, e.g. ...
+   - Set the path of the public and private keys
+   - Optionally, change the node type
 
 Running Terraform
 -----------------
