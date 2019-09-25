@@ -31,8 +31,8 @@ Grab the Terraform config from Git using:
 
 .. code-block:: shell-session
 
-   $ git clone https://github.com/ACRC/oci-cluster-terraform.git
-   $ cd oci-cluster-terraform
+   $ git clone https://github.com/ACRC/citc-terraform.git
+   $ cd citc-terraform
 
 We're now ready to start configuring our infrastructure on either:
 
