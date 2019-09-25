@@ -4,20 +4,58 @@ Creating the infrastructure on Google
 Setting up the environment
 --------------------------
 
-- Install gcloud
-- ``gcloud config set account googleaccount@googlecloud.example``
-- ``gcloud config set project citc-123456``
-- ``gcloud services enable compute.googleapis.com iam.googleapis.com cloudresourcemanager.googleapis.com file.googleapis.com``
+Before we can install the cluster onto your cloud environment, we need to do some initial one-off setup.
+Firstly, we need to install the command-line tool ``gcloud`` which allows you to configure Google Cloud.
+Download and setup ``gcloud`` based on the `instructions from Google <https://cloud.google.com/sdk/docs/>`_.
 
-- ``gcloud iam service-accounts create citc-terraform --display-name "CitC Terraform"``
-- ``gcloud projects add-iam-policy-binding citc-123456 --member serviceAccount:citc-terraform@citc-123456.iam.gserviceaccount.com --role='roles/editor'``
-- ``gcloud projects add-iam-policy-binding citc-123456 --member serviceAccount:citc-terraform@citc-123456.iam.gserviceaccount.com --role='roles/iam.securityAdmin'``
-- ``gcloud iam service-accounts keys create citc-terraform-credentials.json --iam-account=citc-terraform@citc-123456.iam.gserviceaccount.com``
+Once you have ``gcloud`` installed, start by associating it with your Google account:
 
-- Create ssh key pair ``ssh-keygen -t rsa -f ~/.ssh/citc-google -C provisioner`` with no passphrase
+.. code-block:: shell-session
+
+   $ gcloud config set account <googleaccount@example.com>
+
+where you should replace ``<googleaccount@example.com>`` with your email address.
+
+Now that it knows who you are, you should set a default project.
+You can find the ID of your project with ``gcloud projects list``.
+
+.. code-block:: shell-session
+
+   $ gcloud config set project <citc-123456>
+
+Once the project has been set, we can enable the required APIs to build Cluster in the Cloud.
+This step will likely take a few minutes so be patient:
+
+.. code-block:: shell-session
+
+   $ gcloud services enable compute.googleapis.com \
+                            iam.googleapis.com \
+                            cloudresourcemanager.googleapis.com \
+                            file.googleapis.com
+
+That's all the structural setup for the account needed.
+The last ``gcloud`` thing we need to do is create a service account which Terraform uses to communicate with GCP:
+
+.. code-block:: shell-session
+
+   $ gcloud iam service-accounts create citc-terraform --display-name "CitC Terraform"
+   $ gcloud projects add-iam-policy-binding citc-123456 --member serviceAccount:citc-terraform@citc-123456.iam.gserviceaccount.com --role='roles/editor'
+   $ gcloud projects add-iam-policy-binding citc-123456 --member serviceAccount:citc-terraform@citc-123456.iam.gserviceaccount.com --role='roles/iam.securityAdmin'
+   $ gcloud iam service-accounts keys create citc-terraform-credentials.json --iam-account=citc-terraform@citc-123456.iam.gserviceaccount.com
+
+This will create a local JSON file which contains the credentials for this user.
+
+The final step of setup needed is to create a key which Terraform will use to communicate with the server to upload some configuration.
+For now this must be created with no passphrase:
+
+.. code-block:: shell-session
+
+   $ ssh-keygen -t rsa -f ~/.ssh/citc-google -C provisioner
 
 Setting the config
 ------------------
+
+To initialise the local Terrafrom repo, start by running the following:
 
 .. code-block:: shell-session
 
@@ -41,11 +79,16 @@ Rename the example config file ``google-cloud-platform/terraform.tfvars.example`
    $ mv google-cloud-platform/terraform.tfvars.example terraform.tfvars
    $ vim terraform.tfvars
 
-.. note::
-   - Set region and zone
-   - Set project name, e.g. ...
-   - Set the path of the public and private keys
-   - Optionally, change the node type
+There's a few variables which we need to change in here.
+First you must set the ``region`` and ``zone`` variables to the correct values for your account.
+This will depend on what regions you have access to and where you want to build your cluster.
+
+Then the ``project`` variable must be set to the project ID as we used above when running ``gcloud``.
+
+Finally, if you wish you can change the node type used for the management node.
+By default it's a lightweight single-core VM which should be sufficient for most uses but you can change it if you wish.
+
+The rest of the variables should usually be left as they are.
 
 Running Terraform
 -----------------
