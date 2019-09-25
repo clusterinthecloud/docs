@@ -51,7 +51,7 @@ For now this must be created with no passphrase:
 
 .. code-block:: shell-session
 
-   $ ssh-keygen -t rsa -f ~/.ssh/citc-google -C provisioner
+   $ ssh-keygen -t rsa -f ~/.ssh/citc-google -C provisioner -N ""
 
 Setting the config
 ------------------
