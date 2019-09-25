@@ -6,15 +6,19 @@ Create a cluster in the cloud
    :caption: Contents:
 
    infrastructure
+   oracle-infrastructure
+   google-infrastructure
    finalise
    running
 
 Welcome to the documentation for cluster in the cloud.
 By the end of this you  will have a fully-operational, elastically-scaling, heterogeneous Slurm cluster running on cloud resources.
 
-In the future, the intention is that this tutorial will cover installing on all major cloud providers but for now only Oracle Public Cloud is covered.
+In the future, the intention is that this tutorial will cover installing on all major cloud providers
+but for now Oracle Cloud Infrastructure and Google Cloud Platform are covered.
 
-This tutorial was created by `Matt Williams <https://github.com/milliams/>`_ at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
+This tutorial and the Cluster in the Cloud software was created by `Matt Williams <https://github.com/milliams/>`_
+at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
 Contributions to this tutorial document are welcome `at GitHub <https://github.com/ACRC/cluster-in-the-cloud>`_.
 
 .. admonition:: If you need help
