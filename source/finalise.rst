@@ -8,8 +8,10 @@ In the meantime, you can connect to the custer and follow its progress.
 Setting service limits
 ----------------------
 
-You can log into the management node at ``yourusername@mgmtipaddress``,
+You can log into the management node at ``provisionerusername@mgmtipaddress``,
 using the IP address that terraform printed at the end of its run.
+
+On Oracle, the username is ``opc`` and on Google, the username is ``provisioner``.
 For example:
 
 .. code-block:: shell-session
@@ -20,7 +22,7 @@ Once logged in, you can run the ``finish`` script:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ ./finish
+   [opc@mgmt ~]$ finish
 
 It will most likely tell you that the system has not finished configuring.
 If the ``finish`` script is not there, wait a minute or two and it should appear.
@@ -35,15 +37,13 @@ Use ``ctrl-c`` to stop following the log.
 
 You can keep on running trying to run ``finish`` until the node has finished configuring.
 Once it has, you need to tell the system what limits you want to place on the scaling of the cloud.
-To decide what to put here, you should refer to your service limits in the OCI website.
-In the future, we hope to be able to extract these automatically but for now you need to replicate it manually.
 Edit the file ``/home/opc/limits.yaml`` with:
 
 .. code-block:: shell-session
 
    [opc@mgmt ~]$ vim limits.yaml
 
-and set its contents to somthing like:
+On an Oracle-based system, you should set its contents to something like:
 
 .. code-block:: yaml
 
@@ -60,11 +60,24 @@ which specifies for each shape, what the service limit is for each AD in the reg
 In this case each of the shapes ``VM.Standard2.1`` and ``VM.Standard2.2`` have a service limit of 1 in each AD.
 The system will automatically adjust for the shape used by the management node.
 
+To decide what to put here, you should refer to your service limits in the OCI website.
+In the future, we hope to be able to extract these automatically but for now you need to replicate it manually.
+
+On a Google-based system, you should set it to something like:
+
+.. code-block:: yaml
+
+   n1-standard-1: 3
+   n1-standard-2: 3
+
+which restricts the cluster to having at most 3 ``n1-standard-1`` and 3 ``n1-standard-1`` nodes.
+Since Google does not have per-node-type limits, you can make these numbers as large as you like in principle.
+
 Run ``finish`` again and it should configure and start the Slurm server:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ ./finish
+   [opc@mgmt ~]$ finish
 
 If your service limits change, you can update the file and run the script again.
 

@@ -150,7 +150,7 @@ The password for the dashboard can be found by running:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ ./get_secrets
+   [opc@mgmt ~]$ sudo get_secrets
 
 Once you are logged in, you can find a dashboard showing the state of nodes by clicking on "Home ▾" and selecting "Slurm".
 
@@ -165,7 +165,7 @@ pinpoint problems by running
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo sosreport --only-plugins citc && sudo chown opc /var/tmp/sosreport*
+   [opc@mgmt ~]$ sudo sosreport --only-plugins citc && sudo chown $USER /var/tmp/sosreport*
 
 For ``case id`` put your GitHub username (if you have one). This will generate
 a ``tar.xz`` file that can be downloaded and then attached to, for example, a
@@ -184,7 +184,13 @@ you can destroy it using Terraform.
 
 .. code-block:: shell-session
 
-   $ terraform destroy
+   $ terraform destroy google-cloud-platform
+
+or
+
+.. code-block:: shell-session
+
+   $ terraform destroy oracle-cloud-infrastructure
 
 This command *will* ask for confirmation before destroying anything but be sure to read the list of things it's going to terminate to check that it's doing the right thing.
 It will also attempt to terminate any running compute nodes you still have but make sure to check the web interface afterwards.
