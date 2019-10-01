@@ -137,14 +137,14 @@ To make software available across your cluster, the best way is to install it on
 Make sure that all the dependencies for it are available either on the shared filesystem or in the base image you're using.
 i.e. don't use ``yum install`` to provide dependencies.
 
-Consider using a tool like `EasyBuild <https://easybuild.readthedocs.io>`_ or `Spack <https://spack.io/>`_ to manage you software stack.
+Consider using a tool like `EasyBuild <https://easybuild.readthedocs.io>`_ or `Spack <https://spack.io/>`_ to manage your software stack.
 
 Monitoring
 ----------
 
 The cluster automatically collects data from all the nodes and makes them available in a web dashboard.
 
-It is available at the IP address of you management node on port 3000.
+It is available at the IP address of your management node on port 3000.
 Point your browser at ``http://your.mgmt.ip.address:3000`` and log in with the username *admin*.
 The password for the dashboard can be found by running:
 
