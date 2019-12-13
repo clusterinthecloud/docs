@@ -184,13 +184,13 @@ you can destroy it using Terraform.
 
 .. code-block:: shell-session
 
-   $ terraform destroy google-cloud-platform
+   $ terraform destroy google
 
 or
 
 .. code-block:: shell-session
 
-   $ terraform destroy oracle-cloud-infrastructure
+   $ terraform destroy oracle
 
 This command *will* ask for confirmation before destroying anything but be sure to read the list of things it's going to terminate to check that it's doing the right thing.
 It will also attempt to terminate any running compute nodes you still have but make sure to check the web interface afterwards.

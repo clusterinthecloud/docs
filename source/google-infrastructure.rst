@@ -60,7 +60,7 @@ To initialise the local Terraform repo, start by running the following:
 
 .. code-block:: shell-session
 
-   $ terraform init google-cloud-platform
+   $ terraform init google
 
 Now, when you check the Terraform version, you should see the Google provider showing up:
 
@@ -73,11 +73,11 @@ Now, when you check the Terraform version, you should see the Google provider sh
    + provider.tls v1.3.0
    + provider.template v2.1.0
 
-Rename the example config file ``google-cloud-platform/terraform.tfvars.example`` to ``terraform.tfvars`` and open it in a text editor:
+Rename the example config file ``google/terraform.tfvars.example`` to ``terraform.tfvars`` and open it in a text editor:
 
 .. code-block:: shell-session
 
-   $ mv google-cloud-platform/terraform.tfvars.example terraform.tfvars
+   $ mv google/terraform.tfvars.example terraform.tfvars
    $ vim terraform.tfvars
 
 There's a few variables which we need to change in here.
@@ -99,7 +99,7 @@ Check that there's no immediate errors with
 
 .. code-block:: shell-session
 
-   $ terraform validate google-cloud-platform
+   $ terraform validate google
 
 It should return with no errors.
 If there are any problems, fix them before continuing.
@@ -108,7 +108,7 @@ Next, check that Terraform is ready to run with
 
 .. code-block:: shell-session
 
-   $ terraform plan google-cloud-platform
+   $ terraform plan google
 
 which should have, near the end, something like ``Plan: 11 to add, 0 to change, 0 to destroy.``.
 
@@ -116,7 +116,7 @@ We're now ready to go. Run
 
 .. code-block:: shell-session
 
-   $ terraform apply google-cloud-platform
+   $ terraform apply google
 
 and, when prompted, tell it that "yes", you do want to apply.
 

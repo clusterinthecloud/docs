@@ -6,7 +6,7 @@ Setting the config
 
 .. code-block:: shell-session
 
-   $ terraform init oracle-cloud-infrastructure
+   $ terraform init oracle
 
 Now, when you check the Terraform version, you should see the OCI provider showing up:
 
@@ -18,11 +18,11 @@ Now, when you check the Terraform version, you should see the OCI provider showi
    + provider.template v2.1.0
    + provider.tls v2.1.0
 
-Rename the example config file ``oracle-cloud-infrastructure/terraform.tfvars.example`` to ``terraform.tfvars`` and open it in a text editor:
+Rename the example config file ``oracle/terraform.tfvars.example`` to ``terraform.tfvars`` and open it in a text editor:
 
 .. code-block:: shell-session
 
-   $ mv oracle-cloud-infrastructure/terraform.tfvars.example terraform.tfvars
+   $ mv oracle/terraform.tfvars.example terraform.tfvars
    $ vim terraform.tfvars
 
 Following the instructions at the `Oracle Terraform plugin docs <https://www.terraform.io/docs/providers/oci/index.html#authentication>`_,
@@ -56,7 +56,7 @@ Check that there's no immediate errors with
 
 .. code-block:: shell-session
 
-   $ terraform validate oracle-cloud-infrastructure
+   $ terraform validate oracle
 
 It should return with no errors.
 If there are any problems, fix them before continuing.
@@ -65,7 +65,7 @@ Next, check that Terraform is ready to run with
 
 .. code-block:: shell-session
 
-   $ terraform plan oracle-cloud-infrastructure
+   $ terraform plan oracle
 
 which should have, near the end, something like ``Plan: 9 to add, 0 to change, 0 to destroy.``.
 
@@ -73,7 +73,7 @@ We're now ready to go. Run
 
 .. code-block:: shell-session
 
-   $ terraform apply oracle-cloud-infrastructure
+   $ terraform apply oracle
 
 and, when prompted, tell it that "yes", you do want to apply.
 
