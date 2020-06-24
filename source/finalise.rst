@@ -43,6 +43,9 @@ Edit the file ``/home/opc/limits.yaml`` with:
 
    [opc@mgmt ~]$ vim limits.yaml
 
+Oracle
+++++++
+
 On an Oracle-based system, you should set its contents to something like:
 
 .. code-block:: yaml
@@ -63,6 +66,9 @@ The system will automatically adjust for the shape used by the management node.
 To decide what to put here, you should refer to your service limits in the OCI website.
 In the future, we hope to be able to extract these automatically but for now you need to replicate it manually.
 
+Google
+++++++
+
 On a Google-based system, you should set it to something like:
 
 .. code-block:: yaml
@@ -72,6 +78,9 @@ On a Google-based system, you should set it to something like:
 
 which restricts the cluster to having at most 3 ``n1-standard-1`` and 3 ``n1-standard-1`` nodes.
 Since Google does not have per-node-type limits, you can make these numbers as large as you like in principle.
+
+Finalise configuration
+++++++++++++++++++++++
 
 Run ``finish`` again and it should configure and start the Slurm server:
 
