@@ -1,6 +1,47 @@
 Creating the infrastructure on Google
 =====================================
 
+There are two ways of creating Cluster in the Cloud on Google Cloud.
+The older way was to download the code to your computer and run it from there.
+This requires installing Terraform, Git aand setting up SSH locally.
+
+There is now also a "1-click" installer available which is covered in the first section on this page.
+The older method is also documented here for posterity.
+
+1-click installer
+-----------------
+
+Go to the Google Cloud Console and `open a Cloud Shell <https://console.cloud.google.com/home/dashboard?cloudshell=true>`_.
+In the cloud shell type:
+
+.. code-block:: shell-session
+
+   $ docker run -it -e CLOUDSDK_CONFIG=/config/gcloud \
+                    -v $CLOUDSDK_CONFIG:/config/gcloud \
+                    clusterinthecloud/google-install
+
+It will download and start running the setup program and will ask some questions.
+If a question has a default it will show you it in ``[square brackets]``, to accept a default, just press enter.
+
+When it asks for your SSH keys, the simplest approch is to point it to a URL containing your public keys, such as on GitHub as a URL like ``https://github.com/milliams.keys``.
+
+It may ask if you want to continue with the authorisation method used, press ``Y`` and enter..
+
+It will then authenticate with Google and give you a long URL to click on. Click it, sign-in to Google and allow access.
+Take the authentication token it gives you and paste it into the Cloud Shell (ctrl-v and press enter).
+
+It will then go through the process of setting up Cluster in the Cloud and will give you the IP address of the login node to SSH into:
+
+.. code-block:: text
+
+   Your Cluster-in-the-Cloud has now been created :-)
+   Proceed to the next stage. Connect to the cluster
+   by running 'ssh citc@130.61.43.69'
+
+   {"status":"0", "cluster_ip":"130.61.43.69"}
+
+You can now move on to the next page of the tutorial, :doc:`finalising the setup on the cluster <finalise>`.
+
 Setting up the environment
 --------------------------
 

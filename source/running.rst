@@ -230,3 +230,14 @@ or
 
 This command *will* ask for confirmation before destroying anything but be sure to read the list of things it's going to terminate to check that it's doing the right thing.
 It will also attempt to terminate any running compute nodes you still have but make sure to check the web interface afterwards.
+
+Google 1-click uninstall
+++++++++++++++++++++++++
+
+If you installed the cluster with the 1-click installer on Google Cloud then you can uninstall it in a similar way:
+
+.. code-block:: shell-session
+
+   $ docker run -it -e CLOUDSDK_CONFIG=/config/gcloud \
+                    -v $CLOUDSDK_CONFIG:/config/gcloud \
+                    clusterinthecloud/google-destroy
