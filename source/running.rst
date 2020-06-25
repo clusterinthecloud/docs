@@ -88,6 +88,12 @@ The management node will always stay running which is why it's worth only using 
 The rate at which Slurm shuts down is managed in ``/mnt/shared/etc/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
 See the `slurm.conf <https://slurm.schedmd.com/slurm.conf.html>`_ documentation for more details.
 
+You can see the state of all the Slurm nodes (on or off) by running
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ list_nodes
+
 Configuring node images
 -----------------------
 
@@ -234,7 +240,7 @@ It will also attempt to terminate any running compute nodes you still have but m
 Google 1-click uninstall
 ++++++++++++++++++++++++
 
-If you installed the cluster with the 1-click installer on Google Cloud then you can uninstall it in a similar way:
+If you installed the cluster with the 1-click installer on Google Cloud then you can uninstall it in a similar way by running the following in a Google Cloud Shell:
 
 .. code-block:: shell-session
 
