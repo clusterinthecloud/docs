@@ -73,11 +73,11 @@ and create any nodes which are needed for running jobs.
 This is particularly useful in the cloud as a node which has been terminated will not be charged for.
 
 Slurm does this by calling a script ``/usr/local/bin/startnode`` as the ``slurm`` user.
-If necessary, you can call this yourself from the ``opc`` user like:
+If necessary, you can call this yourself from the ``citc`` user like:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo scontrol update NodeName=vm-standard2-1-ad1-0001 State=POWER_UP
+   [citc@mgmt ~]$ sudo scontrol update NodeName=vm-standard2-1-ad1-0001 State=POWER_UP
 
 to turn on the node ``vm-standard2-1-ad1-0001``.
 
@@ -87,6 +87,42 @@ The management node will always stay running which is why it's worth only using 
 
 The rate at which Slurm shuts down is managed in ``/mnt/shared/etc/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
 See the `slurm.conf <https://slurm.schedmd.com/slurm.conf.html>`_ documentation for more details.
+
+Configuring node images
+-----------------------
+
+The images that are used by the compute nodes are built using `Packer <https://packer.io>`_.
+The initial image is build automatically when the cluster is first created with the bare essentials needed to run jobs.
+
+If you want to change the image in any way, you can edit the script ``/home/citc/compute_image_extra.sh``.
+This script is run automatically at the end of the Packer inside the new image so you can fill it with things like:
+
+.. code-block:: bash
+
+   #! /bin/bash
+   sudo yum -y install opencl-headers clinfo
+
+Note the use of ``sudo`` as this script does not run as ``root``.
+
+Once the script has been edited to your liking, re-run Packer with:
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ run-packer
+
+This will start a VM inside your cloud account, build the image and then shut down the VM.
+From that point on, any newly-started nodes will use the new image.
+
+Oracle GPU nodes
+++++++++++++++++
+
+Due to how GPU images are managed on Oracle, you will have to build these manually and separately.
+Edit ``/etc/citc/packer/config.json`` and set the ``"shape_gpu"`` entry to match whichever type of GPU node you have available.
+Then run packer in GPU mode with:
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ run-packer gpu
 
 Cluster shell
 -------------
@@ -100,7 +136,7 @@ You can see a list of the available groups with ``cluset``:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ cluset --list-all
+   [citc@mgmt ~]$ cluset --list-all
    @compute
    @state:idle
    @role:mgmt
@@ -109,7 +145,7 @@ You can then run a command with ``clush``:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ clush -w @compute uname -r
+   [citc@mgmt ~]$ clush -w @compute uname -r
    vm-standard2-1-ad1-0001: 4.14.35-1844.2.5.el7uek.x86_64
    vm-standard2-1-ad3-0001: 4.14.35-1844.2.5.el7uek.x86_64
    vm-standard2-2-ad3-0001: 4.14.35-1844.2.5.el7uek.x86_64
@@ -120,7 +156,7 @@ You can combine the output from different nodes using the ``-b`` flag:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ clush -w @compute -b uname -r
+   [citc@mgmt ~]$ clush -w @compute -b uname -r
    ---------------
    vm-standard2-[1-2]-ad3-0001,vm-standard2-1-ad[1-2]-0001,vm-standard2-2-ad2-0001 (5)
    ---------------
@@ -150,7 +186,7 @@ The password for the dashboard can be found by running:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo get_secrets
+   [citc@mgmt ~]$ sudo get_secrets
 
 Once you are logged in, you can find a dashboard showing the state of nodes by clicking on "Home ▾" and selecting "Slurm".
 
@@ -165,7 +201,7 @@ pinpoint problems by running
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo sosreport --only-plugins citc && sudo chown $USER /var/tmp/sosreport*
+   [citc@mgmt ~]$ sudo sosreport --only-plugins citc && sudo chown $USER /var/tmp/sosreport*
 
 For ``case id`` put your GitHub username (if you have one). This will generate
 a ``tar.xz`` file that can be downloaded and then attached to, for example, a
@@ -194,3 +230,14 @@ or
 
 This command *will* ask for confirmation before destroying anything but be sure to read the list of things it's going to terminate to check that it's doing the right thing.
 It will also attempt to terminate any running compute nodes you still have but make sure to check the web interface afterwards.
+
+Google 1-click uninstall
+++++++++++++++++++++++++
+
+If you installed the cluster with the 1-click installer on Google Cloud then you can uninstall it in a similar way:
+
+.. code-block:: shell-session
+
+   $ docker run -it -e CLOUDSDK_CONFIG=/config/gcloud \
+                    -v $CLOUDSDK_CONFIG:/config/gcloud \
+                    clusterinthecloud/google-destroy

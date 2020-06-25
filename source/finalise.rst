@@ -8,21 +8,20 @@ In the meantime, you can connect to the custer and follow its progress.
 Setting service limits
 ----------------------
 
-You can log into the management node at ``provisionerusername@mgmtipaddress``,
+You can log into the management node at ``citc@mgmtipaddress``,
 using the IP address that terraform printed at the end of its run.
 
-On Oracle, the username is ``opc`` and on Google, the username is ``provisioner``.
 For example:
 
 .. code-block:: shell-session
 
-   $ ssh opc@130.61.43.69
+   $ ssh citc@130.61.43.69
 
 Once logged in, you can run the ``finish`` script:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ finish
+   [citc@mgmt ~]$ finish
 
 It will most likely tell you that the system has not finished configuring.
 If the ``finish`` script is not there, wait a minute or two and it should appear.
@@ -31,17 +30,17 @@ To follow the progress, you can look at the file ``ansible-pull.log`` in ``root`
 
 .. code-block:: shell-session
 
-    [opc@mgmt ~]$ sudo tail -f /root/ansible-pull.log
+    [citc@mgmt ~]$ sudo tail -f /root/ansible-pull.log
 
 Use ``ctrl-c`` to stop following the log.
 
 You can keep on running trying to run ``finish`` until the node has finished configuring.
 Once it has, you need to tell the system what limits you want to place on the scaling of the cloud.
-Edit the file ``/home/opc/limits.yaml`` with:
+Edit the file ``/home/citc/limits.yaml`` with:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ vim limits.yaml
+   [citc@mgmt ~]$ vim limits.yaml
 
 Oracle
 ++++++
@@ -86,7 +85,7 @@ Run ``finish`` again and it should configure and start the Slurm server:
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ finish
+   [citc@mgmt ~]$ finish
 
 If your service limits change, you can update the file and run the script again.
 
@@ -98,7 +97,7 @@ the user's first and surnames and the URL of a file containing their SSH public 
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo /usr/local/sbin/add_user_ldap matt Matt Williams https://github.com/milliams.keys
+   [citc@mgmt ~]$ sudo /usr/local/sbin/add_user_ldap matt Matt Williams https://github.com/milliams.keys
 
 You can run this command again to add another user.
 
@@ -106,7 +105,7 @@ If the user does not have an online list of their keys, you can copy the public 
 
 .. code-block:: shell-session
 
-   [opc@mgmt ~]$ sudo /usr/local/sbin/add_user_ldap matt Matt Williams file:///home/opc/users_key.pub
+   [citc@mgmt ~]$ sudo /usr/local/sbin/add_user_ldap matt Matt Williams file:///home/citc/users_key.pub
 
 Once it has succeeded, log out and try logging as one of those users.
 

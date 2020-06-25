@@ -24,7 +24,7 @@ Contributions to this tutorial document are welcome `at GitHub <https://github.c
 .. admonition:: If you need help
 
    If you have any questions or issues with the system as a whole,
-   please raise them as a GitHub issue at `milliams/cluster-in-the-cloud <https://github.com/milliams/cluster-in-the-cloud/issues>`_.
+   please raise them as a GitHub issue at `clusterinthecloud/support <https://github.com/clusterinthecloud/support/issues>`_.
 
 Prerequisites
 -------------
@@ -42,5 +42,8 @@ To complete this tutorial you will need:
   * Terraform 0.12
   * SSH
   * Git
+
+Alternatively, for some cloud providers (only Google so far) we have a simpler "one-click" installer which has no up-front requirements at all.
+That is covered in the Google chapter.
 
 Start by :doc:`creating the infrastructure <infrastructure>`.
