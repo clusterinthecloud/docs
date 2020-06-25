@@ -88,6 +88,42 @@ The management node will always stay running which is why it's worth only using 
 The rate at which Slurm shuts down is managed in ``/mnt/shared/etc/slurm/slurm.conf`` by the ``SuspendTime`` parameter.
 See the `slurm.conf <https://slurm.schedmd.com/slurm.conf.html>`_ documentation for more details.
 
+Configuring node images
+-----------------------
+
+The images that are used by the compute nodes are built using `Packer <https://packer.io>`_.
+The initial image is build automatically when the cluster is first created with the bare essentials needed to run jobs.
+
+If you want to change the image in any way, you can edit the script ``/home/citc/compute_image_extra.sh``.
+This script is run automatically at the end of the Packer inside the new image so you can fill it with things like:
+
+.. code-block:: bash
+
+   #! /bin/bash
+   sudo yum -y install opencl-headers clinfo
+
+Note the use of ``sudo`` as this script does not run as ``root``.
+
+Once the script has been edited to your liking, re-run Packer with:
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ run-packer
+
+This will start a VM inside your cloud account, build the image and then shut down the VM.
+From that point on, any newly-started nodes will use the new image.
+
+Oracle GPU nodes
+++++++++++++++++
+
+Due to how GPU images are managed on Oracle, you will have to build these manually and separately.
+Edit ``/etc/citc/packer/config.json`` and set the ``"shape_gpu"`` entry to match whichever type of GPU node you have available.
+Then run packer in GPU mode with:
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ run-packer gpu
+
 Cluster shell
 -------------
 
