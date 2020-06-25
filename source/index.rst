@@ -19,7 +19,7 @@ but for now Oracle Cloud Infrastructure and Google Cloud Platform are covered.
 
 This tutorial and the Cluster in the Cloud software was created by `Matt Williams <https://github.com/milliams/>`_
 at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
-Contributions to this tutorial document are welcome `at GitHub <https://github.com/ACRC/cluster-in-the-cloud>`_.
+Contributions to this tutorial document are welcome `at GitHub <https://github.com/clusterinthecloud/docs>`_.
 
 .. admonition:: If you need help
 

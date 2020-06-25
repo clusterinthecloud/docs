@@ -194,7 +194,7 @@ Reporting issues
 ----------------
 
 Please report questions and problems to `Cluster in the Cloud GitHub Issues
-<https://github.com/milliams/cluster-in-the-cloud/issues>`_.
+<https://github.com/clusterinthecloud/support/issues>`_.
 
 You can gather diagnostic information from your cluster which might help
 pinpoint problems by running
