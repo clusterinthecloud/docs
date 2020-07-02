@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Cluster in the cloud'
-copyright = '2018, Matt Williams'
+copyright = '2020, Matt Williams. CC BY-SA 4.0'
 author = 'Matt Williams'
 
 # The short X.Y version
