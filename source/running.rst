@@ -207,7 +207,7 @@ The password for the dashboard can be found by running:
 
    [citc@mgmt ~]$ sudo get_secrets
 
-Once you are logged in, you can find a dashboard showing the state of nodes by clicking on "Home ▾" and selecting "Slurm".
+Once you are logged in, you can find a dashboard showing the state of nodes by clicking on "Home" in the top-left and selecting "Slurm".
 
 Reporting issues
 ----------------
