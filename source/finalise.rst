@@ -78,6 +78,19 @@ On a Google-based system, you should set it to something like:
 which restricts the cluster to having at most 3 ``n1-standard-1`` and 3 ``n1-standard-1`` nodes.
 Since Google does not have per-node-type limits, you can make these numbers as large as you like in principle.
 
+AWS
++++
+
+On a AWS-based system, you should set it to something like:
+
+.. code-block:: yaml
+
+   t3a.small: 3
+   t3a.medium: 3
+
+which restricts the cluster to having at most 3 ``t3a.small`` and 3 ``t3a.medium`` nodes.
+Since AWS does not have per-node-type limits, you can make these numbers as large as you like in principle.
+
 Finalise configuration
 ++++++++++++++++++++++
 
