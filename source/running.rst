@@ -114,7 +114,7 @@ Once the script has been edited to your liking, re-run Packer with:
 
 .. code-block:: shell-session
 
-   [citc@mgmt ~]$ run-packer
+   [citc@mgmt ~]$ sudo run-packer
 
 This will start a VM inside your cloud account, build the image and then shut down the VM.
 From that point on, any newly-started nodes will use the new image.
@@ -128,7 +128,20 @@ Then run packer in GPU mode with:
 
 .. code-block:: shell-session
 
-   [citc@mgmt ~]$ run-packer gpu
+   [citc@mgmt ~]$ sudo run-packer gpu
+
+AWS ARM nodes
+++++++++++++++++
+
+AWS provides instance types with Graviton processors which are based on the aarch64 architecture.
+This requires a special image to be built which is not created by deafult.
+To build this image, run the following:
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ sudo run-packer aarch64
+
+which will rebuild the standard x86_64 iamge and then also build the aarch64 image.
 
 Cluster shell
 -------------
