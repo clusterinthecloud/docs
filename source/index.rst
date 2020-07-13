@@ -6,8 +6,9 @@ Create a cluster in the cloud
    :caption: Contents:
 
    infrastructure
-   oracle-infrastructure
+   aws-infrastructure
    google-infrastructure
+   oracle-infrastructure
    finalise
    running
 
@@ -15,7 +16,7 @@ Welcome to the documentation for cluster in the cloud.
 By the end of this you  will have a fully-operational, elastically-scaling, heterogeneous Slurm cluster running on cloud resources.
 
 In the future, the intention is that this tutorial will cover installing on all major cloud providers
-but for now Oracle Cloud Infrastructure and Google Cloud Platform are covered.
+but for now AWS, Google Cloud Platform and Oracle Cloud Infrastructure are covered.
 
 This tutorial and the Cluster in the Cloud software was created by `Matt Williams <https://github.com/milliams/>`_
 at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
@@ -33,7 +34,7 @@ To complete this tutorial you will need:
 
 * access to a command-line (i.e. Linux, MacOS Terminal or WSL)
 * an `SSH key pair <https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/>`_
-* an account with credit on Oracle or Google cloud
+* an account with credit on AWS, Google or Oracle cloud
 
   * the account must have admin permissions to create infrastructure
 

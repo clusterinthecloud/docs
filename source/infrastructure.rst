@@ -36,5 +36,6 @@ Grab the Terraform config from Git using:
 
 We're now ready to start configuring our infrastructure on either:
 
-- :doc:`Oracle Cloud Infrastructure <oracle-infrastructure>` or
-- :doc:`Google Cloud Platform <google-infrastructure>`.
+- :doc:`AWS <aws-infrastructure>` or
+- :doc:`Google Cloud Platform <google-infrastructure>` or
+- :doc:`Oracle Cloud Infrastructure <oracle-infrastructure>`.
