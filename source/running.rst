@@ -239,6 +239,12 @@ you can destroy it using Terraform.
 
 .. code-block:: shell-session
 
+   $ terraform destroy aws
+
+or
+
+.. code-block:: shell-session
+
    $ terraform destroy google
 
 or
