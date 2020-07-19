@@ -50,7 +50,7 @@ Rename the example config file ``aws/terraform.tfvars.example`` to ``terraform.t
    $ vim terraform.tfvars
 
 There's a few variables which can be changed in here, but by default you should not have to change anything.
-To see what possible configuration opions there are, look at ``aws/variables.tf``.
+To see what possible configuration options there are, look at ``aws/variables.tf``.
 
 Running Terraform
 -----------------
