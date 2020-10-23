@@ -234,8 +234,16 @@ Destroying the whole cluster
    Please bear in mind that this will also destroy your file system which contains your user's home area
    and any data stored on the cluster.
 
-When you've completely finished with the cluster,
-you can destroy it using Terraform.
+When you've completely finished with the cluster, you can destroy it.
+
+First you must make sure that you do not have any running jobs or compute nodes.
+You can kill all running nodes by running the following on the management node:
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ /usr/local/bin/kill_all_nodes
+
+Then, you can log out and locally run:
 
 .. code-block:: shell-session
 
