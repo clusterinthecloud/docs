@@ -134,14 +134,14 @@ AWS ARM nodes
 ++++++++++++++++
 
 AWS provides instance types with Graviton processors which are based on the aarch64 architecture.
-This requires a special image to be built which is not created by deafult.
+This requires a special image to be built which is not created by default.
 To build this image, run the following:
 
 .. code-block:: shell-session
 
    [citc@mgmt ~]$ sudo /usr/local/bin/run-packer aarch64
 
-which will rebuild the standard x86_64 iamge and then also build the aarch64 image.
+which will build the aarch64 image.
 
 Cluster shell
 -------------

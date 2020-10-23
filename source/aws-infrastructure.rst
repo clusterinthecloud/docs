@@ -49,8 +49,11 @@ Rename the example config file ``aws/terraform.tfvars.example`` to ``terraform.t
    $ mv aws/terraform.tfvars.example terraform.tfvars
    $ vim terraform.tfvars
 
-There's a few variables which can be changed in here, but by default you should not have to change anything.
-To see what possible configuration options there are, look at ``aws/variables.tf``.
+There's a few variables which can be set in here.
+The only variable which you must set is ``admin_public_keys`` which must contain the public key you wish to use to log in to the admin account on the cluster.
+You can set multiple public keys here if you wish.
+
+To see what other possible configuration opions there are, look at ``aws/variables.tf``.
 
 Running Terraform
 -----------------

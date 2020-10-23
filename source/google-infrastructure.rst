@@ -127,6 +127,9 @@ This will depend on what regions you have access to and where you want to build 
 
 Then the ``project`` variable must be set to the project ID as we used above when running ``gcloud``.
 
+You must set ``admin_public_keys`` to contain the public key you wish to use to log in to the admin account on the cluster.
+You can set multiple public keys here if you wish.
+
 Finally, if you wish you can change the node type used for the management node.
 By default it's a lightweight single-core VM which should be sufficient for most uses but you can change it if you wish.
 
