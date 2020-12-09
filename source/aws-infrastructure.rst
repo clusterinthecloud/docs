@@ -13,6 +13,47 @@ Once installed, `configure the tool <https://docs.aws.amazon.com/cli/latest/user
 
 All later steps will use these credentials.
 
+There are two ways of creating Cluster in the Cloud on AWS.
+The older way was to download the code to your computer and run it from there.
+This requires installing Terraform, Git and setting up SSH locally.
+
+There is now also a "1-click" installer available which is covered in the first section on this page.
+The older method is also documented here for posterity.
+
+1-click installer
+-----------------
+
+Download the installer (``install-citc.py``) and uninstaller (``destroy-citc.py``) scripts from `clusterinthecloud/installer <https://github.com/clusterinthecloud/installer>`__.
+You can do this either by cloning the  Git repo (``git clone https://github.com/clusterinthecloud/installer.git``), by downloading the zip (`master.zip <https://github.com/clusterinthecloud/installer/archive/master.zip>`__) or by downloading the two files individually.
+
+The only requirements for the script are Python >= 2.7, ``ssh``, ``ssh-keygen`` and ``scp``.
+
+Run the install script as:
+
+.. code-block:: shell-session
+
+   $ ./install-citc.sh aws
+
+If you need to specify the region for the cluster or an AWS credential profile, you can pass them in with ``--region`` or ``--profile``.
+
+This should download all it needs automatically, start the cluster and provide you with a private key (in a subdirectory named after the cluster ID, and called ``citc-key``) and an IP address. Something like:
+
+
+.. code-block:: text
+
+   The file 'citc-terraform-useful-gnu/citc-key' will allow you to log into the new cluster
+   Make sure you save this key as it is needed to destroy the cluster later.
+   The IP address of the cluster is 130.61.43.69
+   Connect with:
+     ssh -i citc-terraform-useful-gnu/citc-key citc@130.61.43.69
+
+You can now move on to the next page of the tutorial, :doc:`finalising the setup on the cluster <finalise>`.
+
+Otherwise, if you wish to do the steps manually, then read on from here...
+
+Creating an SSH key pair
+------------------------
+
 The final step of setup needed is to create a key which Terraform will use to communicate with the server to upload some configuration.
 For now this must be created with no passphrase:
 

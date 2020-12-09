@@ -264,6 +264,18 @@ or
 This command *will* ask for confirmation before destroying anything but be sure to read the list of things it's going to terminate to check that it's doing the right thing.
 It will also attempt to terminate any running compute nodes you still have but make sure to check the web interface afterwards.
 
+AWS 1-click uninstall
++++++++++++++++++++++
+
+If you installed the cluster with the 1-click installer on AWS then you can uninstall it in a similar way by running following:
+
+.. code-block:: shell-session
+
+   $ ./destroy-citc.py aws 130.61.43.69 citc-terraform-useful-gnu/citc-key
+
+but passing in the IP address of the management node that you we given when the cluster was created, as well as the SSH key to connect with.
+
+
 Google 1-click uninstall
 ++++++++++++++++++++++++
 

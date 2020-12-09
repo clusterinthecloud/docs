@@ -3,7 +3,7 @@ Creating the infrastructure on Google
 
 There are two ways of creating Cluster in the Cloud on Google Cloud.
 The older way was to download the code to your computer and run it from there.
-This requires installing Terraform, Git aand setting up SSH locally.
+This requires installing Terraform, Git and setting up SSH locally.
 
 There is now also a "1-click" installer available which is covered in the first section on this page.
 The older method is also documented here for posterity.
@@ -41,6 +41,8 @@ It will then go through the process of setting up Cluster in the Cloud and will 
    {"status":"0", "cluster_ip":"130.61.43.69"}
 
 You can now move on to the next page of the tutorial, :doc:`finalising the setup on the cluster <finalise>`.
+
+Otherwise, if you wish to do the steps manually, then read on from here...
 
 Setting up the environment
 --------------------------
