@@ -44,7 +44,7 @@ To complete this tutorial you will need:
   * SSH
   * Git
 
-Alternatively, for some cloud providers (only Google so far) we have a simpler "one-click" installer which has no up-front requirements at all.
-That is covered in the Google chapter.
+Alternatively, for some cloud providers (only AWS and Google so far) we have a simpler "one-click" installer which has fewer or no up-front requirements at all.
+That is covered in the AWS and Google chapters.
 
 Start by :doc:`creating the infrastructure <infrastructure>`.
