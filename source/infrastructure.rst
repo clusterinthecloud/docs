@@ -1,6 +1,9 @@
 Set up the cloud infrastructure
 ===============================
 
+If you are using AWS or Google and want to use the 1-click installer, you do not need to install Terraform.
+You can skip this chapter and go straight to their page.
+
 Getting Terraform
 -----------------
 
