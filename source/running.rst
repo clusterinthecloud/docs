@@ -138,19 +138,6 @@ install the nvidia driver and CUDA toolchain:
    sudo dkms autoinstall
    EOF
 
-We can't just rebuild our image straight away though since the CUDA
-toolchain is large and exceeds the base image size, consequently we need
-to change the packer configuration to create a larger image. Edit
-``/etc/citc/packer/all.pkr.hcl`` in your favourite editor, and add the
-following to the end of the ``source "amazon-ebs" "aws"`` section
-
-.. code-block:: 
-
-   launch_block_device_mappings {
-       device_name = "/dev/sda1"
-       volume_size =  10
-   }
-
 We can now re-build the image used to provision compute nodes:
 
 .. code-block:: shell-session
