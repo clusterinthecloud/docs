@@ -149,7 +149,7 @@ following to the end of the ``source "amazon-ebs" "aws"`` section
 
    launch_block_device_mappings {
        device_name = "/dev/sda1"
-       volume_size =  40
+       volume_size =  10
    }
 
 We can now re-build the image used to provision compute nodes:
