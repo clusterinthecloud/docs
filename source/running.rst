@@ -135,7 +135,6 @@ install the nvidia driver and CUDA toolchain:
    sudo dnf clean all
    sudo dnf -y install kernel-devel
    sudo dnf -y module install nvidia-driver:latest-dkms
-   sudo dnf -y install cuda
    sudo dkms autoinstall
    EOF
 
