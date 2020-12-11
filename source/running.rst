@@ -119,6 +119,49 @@ Once the script has been edited to your liking, re-run Packer with:
 This will start a VM inside your cloud account, build the image and then shut down the VM.
 From that point on, any newly-started nodes will use the new image.
 
+AWS GPU nodes
++++++++++++++
+
+We need to adapt the default packer image as out of the box it does not
+contain any of the nvidia software necessary to interact with the GPU.
+
+The first step is to change the ``compute_image_extra.sh`` script to
+install the nvidia driver and CUDA toolchain:
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ cat >> compute_image_extra.sh <<EOF
+   sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-rhel8.repo
+   sudo dnf clean all
+   sudo dnf -y install kernel-devel
+   sudo dnf -y module install nvidia-driver:latest-dkms
+   sudo dnf -y install cuda
+   sudo dkms autoinstall
+   EOF
+
+We can't just rebuild our image straight away though since the CUDA
+toolchain is large and exceeds the base image size, consequently we need
+to change the packer configuration to create a larger image. Edit
+``/etc/citc/packer/all.pkr.hcl`` in your favourite editor, and add the
+following to the end of the ``source "amazon-ebs" "aws"`` section
+
+.. code-block:: 
+
+   launch_block_device_mappings {
+       device_name = "/dev/sda1"
+       volume_size =  40
+   }
+
+We can now re-build the image used to provision compute nodes:
+
+.. code-block:: shell-session
+
+   [citc@mgmt ~]$ sudo /usr/local/bin/run-packer
+
+Once this has succesfully completed you will be able to launch jobs on compute
+nodes with nvidia GPUs.
+
+
 Oracle GPU nodes
 ++++++++++++++++
 
