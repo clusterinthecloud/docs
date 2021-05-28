@@ -10,6 +10,10 @@ Getting Terraform
 The first step is to get a bunch of servers powered on in your cloud.
 We do this using a tool called `Terraform <https://www.terraform.io/>`_.
 
+.. warning:: 
+
+   Only Terraform <= 0.12.x is supported at this time.
+
 Make sure that Terraform is installed by running the following in the command-line:
 
 .. code-block:: shell-session
