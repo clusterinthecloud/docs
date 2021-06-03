@@ -40,7 +40,7 @@ Edit the file ``/home/citc/limits.yaml`` with:
 
 .. code-block:: shell-session
 
-   [citc@mgmt ~]$ vim limits.yaml
+   [citc@mgmt ~]$ vi limits.yaml
 
 Oracle
 ++++++
