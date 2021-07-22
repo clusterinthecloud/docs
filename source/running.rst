@@ -119,19 +119,27 @@ Once the script has been edited to your liking, re-run Packer with:
 This will start a VM inside your cloud account, build the image and then shut down the VM.
 From that point on, any newly-started nodes will use the new image.
 
-Oracle GPU nodes
-++++++++++++++++
+GPU nodes
++++++++++
 
-Due to how GPU images are managed on Oracle, you will have to build these manually and separately.
-Edit ``/etc/citc/packer/config.json`` and set the ``"shape_gpu"`` entry to match whichever type of GPU node you have available.
-Then run packer in GPU mode with:
+The default image that is built by CitC does not include any GPU drivers.
+If you want to use the GPUs on a given node, you will need to compile the drivers into the node image.
 
-.. code-block:: shell-session
+You can follow the `NVIDIA documentation for this <https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#redhat8-installation>`__, which at its simplest means adding:
 
-   [citc@mgmt ~]$ sudo /usr/local/bin/run-packer gpu
+.. code-block:: bash
+
+   if [[ $(arch) == "x86_64" ]]; then
+     sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-rhel8.repo
+     sudo dnf module install -y nvidia-driver:latest-dkms
+   fi
+
+to ``/home/citc/compute_image_extra.sh`` and re-running Packer as shown above.
+
+This will just install the base drivers, but if you need CUDA too, then add ``sudo dnf install -y cuda`` to the commands in that file too.
 
 AWS ARM nodes
-++++++++++++++++
++++++++++++++
 
 AWS provides instance types with Graviton processors which are based on the aarch64 architecture.
 This requires a special image to be built which is not created by default.
