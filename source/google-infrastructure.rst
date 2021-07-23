@@ -89,13 +89,6 @@ Make sure to replace every instance of ``<citc-123456>`` with your project ID:
 
 This will create a local JSON file which contains the credentials for this user.
 
-The final step of setup needed is to create a key which Terraform will use to communicate with the server to upload some configuration.
-For now this must be created with no passphrase:
-
-.. code-block:: shell-session
-
-   $ ssh-keygen -t rsa -f ~/.ssh/citc-google -C provisioner -N ""
-
 Setting the config
 ------------------
 
@@ -103,25 +96,28 @@ To initialise the local Terraform repo, start by running the following:
 
 .. code-block:: shell-session
 
-   $ terraform init google
+   $ terraform -chdir=google init
 
 Now, when you check the Terraform version, you should see the Google provider showing up:
 
 .. code-block:: shell-session
 
-   $ terraform version
-   Terraform v0.12.9
-   + provider.external v1.2.0
-   + provider.google v2.10.0
-   + provider.tls v1.3.0
-   + provider.template v2.1.0
+   $ terraform -chdir=google version
+   Terraform v1.0.3
+   on linux_amd64
+   + provider registry.terraform.io/hashicorp/external v2.1.0
+   + provider registry.terraform.io/hashicorp/google v3.76.0
+   + provider registry.terraform.io/hashicorp/local v2.1.0
+   + provider registry.terraform.io/hashicorp/random v3.1.0
+   + provider registry.terraform.io/hashicorp/template v2.2.0
+   + provider registry.terraform.io/hashicorp/tls v3.1.0
 
-Rename the example config file ``google/terraform.tfvars.example`` to ``terraform.tfvars`` and open it in a text editor:
+Rename the example config file ``google/terraform.tfvars.example`` to ``google/terraform.tfvars`` and open it in a text editor:
 
 .. code-block:: shell-session
 
-   $ mv google/terraform.tfvars.example terraform.tfvars
-   $ vim terraform.tfvars
+   $ mv google/terraform.tfvars.example google/terraform.tfvars
+   $ vim google/terraform.tfvars
 
 There's a few variables which we need to change in here.
 First you must set the ``region`` and ``zone`` variables to the correct values for your account.
@@ -145,7 +141,7 @@ Check that there's no immediate errors with
 
 .. code-block:: shell-session
 
-   $ terraform validate google
+   $ terraform -chdir=google validate
 
 It should return with no errors.
 If there are any problems, fix them before continuing.
@@ -154,7 +150,7 @@ Next, check that Terraform is ready to run with
 
 .. code-block:: shell-session
 
-   $ terraform plan google
+   $ terraform -chdir=google plan
 
 which should have, near the end, something like ``Plan: 11 to add, 0 to change, 0 to destroy.``.
 
@@ -162,7 +158,7 @@ We're now ready to go. Run
 
 .. code-block:: shell-session
 
-   $ terraform apply google
+   $ terraform -chdir=google apply
 
 and, when prompted, tell it that "yes", you do want to apply.
 
@@ -172,6 +168,7 @@ It will take some time but should return without any errors with something green
 
    Outputs:
 
-   ManagementPublicIP = 130.61.43.69
+   ManagementPublicIP = "130.61.43.69"
+   cluster_id = "cheerful-macaw"
 
 You are now ready to move on to :doc:`finalising the setup on the cluster <finalise>`.
