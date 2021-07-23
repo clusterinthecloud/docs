@@ -40,7 +40,7 @@ To complete this tutorial you will need:
 
 * local software installed
 
-  * Terraform 0.12
+  * Terraform 1.0 or newer
   * SSH
   * Git
 
