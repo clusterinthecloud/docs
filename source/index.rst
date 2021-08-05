@@ -12,7 +12,7 @@ Create a cluster in the cloud
    finalise
    running
 
-Welcome to the documentation for cluster in the cloud.
+Welcome to the documentation for Cluster in the Cloud.
 By the end of this you  will have a fully-operational, elastically-scaling, heterogeneous Slurm cluster running on cloud resources.
 
 In the future, the intention is that this tutorial will cover installing on all major cloud providers
@@ -23,9 +23,14 @@ at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
 Contributions to this tutorial document are welcome `at GitHub <https://github.com/clusterinthecloud/docs>`_.
 
 .. admonition:: If you need help
+   :class: tip
 
    If you have any questions or issues with the system as a whole,
    please raise them as a GitHub issue at `clusterinthecloud/support <https://github.com/clusterinthecloud/support/issues>`_.
+
+.. note::
+
+   If you use Cluster in the Cloud for any published research, please mention us in your acknowledgements.
 
 Prerequisites
 -------------
