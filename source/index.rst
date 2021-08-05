@@ -22,7 +22,7 @@ Contributions to this tutorial document are welcome `at GitHub <https://github.c
    If you use Cluster in the Cloud for any published research, please mention us in your acknowledgements.
 
 .. toctree::
-   :maxdepth: 1
+   :titlesonly:
    :caption: Tutorial
 
    infrastructure
@@ -60,13 +60,15 @@ More info
 Once you've got your cluster up and running, see these topics for more information:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
+   :titlesonly:
    :caption: How-tos
 
    node-images
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
    :caption: Concepts
 
    overview
