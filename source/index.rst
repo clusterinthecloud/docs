@@ -53,3 +53,14 @@ Alternatively, for some cloud providers (only AWS and Google so far) we have a s
 That is covered in the AWS and Google chapters.
 
 Start by :doc:`creating the infrastructure <infrastructure>`.
+
+More info
+---------
+
+Once you've got your cluster up and running, see these topics for more information:
+
+.. toctree::
+   :maxdepth: 1
+   :caption: How-tos
+
+   node-images
