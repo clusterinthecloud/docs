@@ -1,6 +1,10 @@
 Configuring node images
 =======================
 
+.. admonition:: What is this page about?
+
+    This page explains how you can configure the image that is used on the compute nodes.
+
 The images that are used by the compute nodes are built using `Packer <https://packer.io>`_.
 The initial image is build automatically when the cluster is first created with the bare essentials needed to run jobs.
 
