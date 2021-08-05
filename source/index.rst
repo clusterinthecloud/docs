@@ -1,17 +1,6 @@
 Create a cluster in the cloud
 =============================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   infrastructure
-   aws-infrastructure
-   google-infrastructure
-   oracle-infrastructure
-   finalise
-   running
-
 Welcome to the documentation for Cluster in the Cloud.
 By the end of this you  will have a fully-operational, elastically-scaling, heterogeneous Slurm cluster running on cloud resources.
 
@@ -31,6 +20,17 @@ Contributions to this tutorial document are welcome `at GitHub <https://github.c
 .. note::
 
    If you use Cluster in the Cloud for any published research, please mention us in your acknowledgements.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Tutorial
+
+   infrastructure
+   aws-infrastructure
+   google-infrastructure
+   oracle-infrastructure
+   finalise
+   running
 
 Prerequisites
 -------------
