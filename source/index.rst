@@ -72,3 +72,4 @@ Once you've got your cluster up and running, see these topics for more informati
    :caption: Concepts
 
    overview
+   versioning
