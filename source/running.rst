@@ -16,7 +16,7 @@ A simple first Slurm script, ``test.slm``, could look like:
 
    #! /bin/bash
 
-   srun -l hostname
+   hostname
 
 which you could run with:
 
@@ -62,7 +62,7 @@ If you want more control over the size of your job etc., then you can set those 
    #SBATCH --cpus-per-task=1
    #SBATCH --time=10:00
 
-   srun -l hostname
+   hostname
 
 Slurm elastic scaling
 ---------------------
