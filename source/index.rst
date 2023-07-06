@@ -65,6 +65,7 @@ Once you've got your cluster up and running, see these topics for more informati
    :caption: How-tos
 
    node-images
+   ansible
 
 .. toctree::
    :maxdepth: 1
