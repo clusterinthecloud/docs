@@ -8,7 +8,7 @@ In the future, the intention is that this tutorial will cover installing on all 
 but for now AWS, Google Cloud Platform and Oracle Cloud Infrastructure are covered.
 
 This tutorial and the Cluster in the Cloud software was created by `Matt Williams <https://github.com/milliams/>`_
-at the `ACRC in Bristol <http://www.bristol.ac.uk/acrc/>`_.
+at the `ACRC in Bristol <https://www.bristol.ac.uk/acrc/>`_.
 Contributions to this tutorial document are welcome `at GitHub <https://github.com/clusterinthecloud/docs>`_.
 
 .. admonition:: If you need help
