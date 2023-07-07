@@ -33,6 +33,13 @@ To re-run this manually (for example to retry a failure, or if you've updated th
 
 This will run Ansible in the foreground and also send its output to the usual ``/root/ansible-pull.log`` file.
 
+This will, by default, also re-build the compute node image which a, may not be what you want and b, will take longer.
+You can disable the running of the image rebuild step with:
+
+.. code-block:: shell-session
+
+   $ sudo /root/run_ansible --skip-tags=packer
+
 Compute nodes
 -------------
 
